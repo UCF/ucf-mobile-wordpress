@@ -136,7 +136,7 @@ ul{padding: 0; margin: 0; list-style-type: none;}
 	font-family: "Helvetica Neue", "Helvetica", "sans-serif";
 }
 .msie #widgets .events .date{display: block; float: left; width: 30px;}
-body.ie #widgets .events .date{border: 1px solid #ccc;}
+.msie #widgets .events .date{border: 1px solid #ccc;}
 #widgets .events .date .day{font-size: 24px; display: block; margin-top: 10px;}
 #widgets .events .title{font-size: 14px; padding-left: 10px; display: table-cell;}
 .msie #widgets .events .title{display: block; margin-left: 50px;}
