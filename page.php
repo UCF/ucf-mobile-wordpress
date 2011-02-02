@@ -72,7 +72,7 @@
 				));
 			?>
 			<?php foreach($updates as $update):?>
-				<li><a href="<?=get_permalink($update->ID)?>"><?=$update->post_title?></a></li>
+				<li><a href="<?=get_permalink($update->ID)?>" target="_blank"><?=$update->post_title?></a></li>
 			<?php endforeach;?>
 			</ul>
 			<?php endif;?>

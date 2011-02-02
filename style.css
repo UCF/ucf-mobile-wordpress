@@ -110,6 +110,9 @@ ul{padding: 0; margin: 0; list-style-type: none;}
 #forms-policies-procedures h3{}
 #forms-policies-procedures .form-list{margin-bottom: 15px;}
 
+/*/ Update page styles /*/
+#updates{width: 600px; margin: 20px auto;}
+
 
 /*/ Widget Styles /*/
 #widgets ul{font-size: 12px; list-style-type: none; padding: 0; margin: 0;}

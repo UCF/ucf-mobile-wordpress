@@ -68,10 +68,17 @@ add_filter('thematic_head_profile', 'provost_head_profile');
 
 
 function provost_template_redirect(){
+	global $post;
+	$type  = $post->post_type;
 	$title = get_the_title();
 	switch($title){
 		case 'Home':
 			include('templates/home.php');
+			die();
+	}
+	switch($type){
+		case 'provost_update':
+			include('templates/update.php');
 			die();
 	}
 }
