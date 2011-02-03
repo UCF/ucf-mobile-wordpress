@@ -111,7 +111,22 @@ ul{padding: 0; margin: 0; list-style-type: none;}
 #forms-policies-procedures .form-list{margin-bottom: 15px;}
 
 /*/ Update page styles /*/
-#updates{width: 600px; margin: 20px auto;}
+#updates{width: 630px; margin: 30px auto; font-family: "Georgia", "Times New Roman", "Times", "serif"; font-size: 14px; color: #3F3D3D;}
+#updates #header{border-bottom: 1px solid #999; color: #3F3D3D;}
+#updates #header h1{width: 330px; margin-right: 30px; float: left;}
+#updates #header .date{margin-left: 270px; position: relative; top: 20px; text-align: right;}
+#updates #content{width: 390px; margin-right: 30px; float: left;}
+#updates #sidebar{margin-left: 420px;}
+#updates #sidebar #tony-waldrop div{display: none;}
+#updates #sidebar #feedback{}
+#updates #sidebar #feedback h2{font-size: 15px; color: #666; text-align: center; padding: 10px; margin: 10px auto; border-top: 1px solid #999; width: 70%;}
+#updates #sidebar #feedback a{display: block; height: 113px; width: 212px; background: transparent url('static/img/feedback.jpg') no-repeat; text-indent: -2048px;}
+#updates #footer{border-top: 1px solid #ddd; color: #A1A1A1; font-size: 11px;  font-family: "Lucida Grande", "Arial", "sans-serif";}
+#updates #footer ul{padding: 0; margin: 0 0 5px 0;  font-family: "Lucida Grande", "Arial", "sans-serif";}
+#updates #footer ul li{display: inline;}
+#updates #footer ul .first{padding: 0;}
+#updates #footer a{color: #a1a1a1;}
+#updates .end{clear: both;}
 
 
 /*/ Widget Styles /*/

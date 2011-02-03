@@ -7,7 +7,8 @@
 		<link href="http://cdn.ucf.edu/webcom/-/css/blueprint-ie.css" rel="stylesheet" media="screen, projection">
 		<![endif]-->
 		
-		<title></title> 
+		<title><?php the_title()?></title> 
+		<meta http-equiv='X-UA-COMPATIBLE' content='IE=IE7'>
 		<meta name="description" content="">
 		<meta charset="utf-8">
 		<link rel="shortcut icon" href="<?=PROVOST_IMG_URL?>/favicon.ico">
@@ -20,8 +21,38 @@
 	<!--[if (gt IE 9)|!(IE)]><!--><body><!--<![endif]-->
 		<?php the_post();?>
 		<div id="updates">
-			<h1><?php the_title();?></h1>
-			<?php the_content();?>
+			<div id="header">
+				<h1><?php the_title();?></h1>
+				<div class="date"><?=date('l, F j, Y', strtotime($post->post_date))?></div>
+				<div class="end"><!-- --></div>
+			</div>
+			
+			<div id="content">
+				<?php the_content();?>
+			</div>
+			
+			<div id="sidebar">
+				<div id="tony-waldrop">
+					<img src="<?=PROVOST_IMG_URL?>/tony-waldrop.jpg" alt="Tony Waldrop">
+					<div class="name">Tony G. Waldrop, Ph.D.</div>
+					<div class="title">Provost and Vice President for Academic Affairs</div>
+				</div>
+				<div id="feedback">
+					<h2>Contact&nbsp;the&nbsp;Provost</h2>
+					<a href="#">For questions or comments</a>
+				</div>
+			</div>
+			<div class="end"><!-- --></div>
+			
+			<div id="footer">
+				<ul>
+					<li class="first">University of Central Florida</li>
+					<li>&bull; 4000 Central Florida Blvd</li>
+					<li>&bull; Orlando, FL 32816-0065</li>
+				</ul>
+				<div class="end"><!-- --></div>
+				<a href="http://provost.ucf.edu">http://provost.ucf.edu</a>
+			</div>
 		</div>
 		
 		<!-- Footer Scripts -->
