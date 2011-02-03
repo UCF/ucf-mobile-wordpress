@@ -51,22 +51,6 @@
 			<!-- Academic Affairs specific template information -->
 			<?php thematic_comments_template()?>
 			<?php endif;?>
-			
-			<?php if(get_post_meta($post->ID, 'use-updates', True)):?>
-			<ul>
-			<?php
-				$updates = get_posts(array(
-					'numberposts' => -1,
-					'orderby'     => 'date',
-					'order'       => 'DESC',
-					'post_type'   => get_custom_post_type('ProvostUpdate'),
-				));
-			?>
-			<?php foreach($updates as $update):?>
-				<li><a href="<?=get_permalink($update->ID)?>" target="_blank"><?=$update->post_title?></a></li>
-			<?php endforeach;?>
-			</ul>
-			<?php endif;?>
 		</div>
 		
 	</div>
