@@ -8,7 +8,6 @@
 		<![endif]-->
 		
 		<title><?php the_title()?></title> 
-		<meta http-equiv='X-UA-COMPATIBLE' content='IE=IE7'>
 		<meta name="description" content="">
 		<meta charset="utf-8">
 		<link rel="shortcut icon" href="<?=PROVOST_IMG_URL?>/favicon.ico">
