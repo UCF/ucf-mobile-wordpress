@@ -52,15 +52,6 @@
 			<?php thematic_comments_template()?>
 			<?php endif;?>
 			
-			<?php if(get_post_meta($post->ID, 'org-chart', True)):?>
-			<!-- Academic Affairs specific template information -->
-			<?php include('templates/section-organization.php');?>
-			<?php endif;?>
-			
-			<?php if(get_post_meta($post->ID, 'use-forms', True)):?>
-			<?php include('templates/section-forms.php');?>
-			<?php endif;?>
-			
 			<?php if(get_post_meta($post->ID, 'use-updates', True)):?>
 			<ul>
 			<?php

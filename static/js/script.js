@@ -16,7 +16,9 @@ var __init__ = (function($){
 		$('.events').each(function(){
 			var _this    = $(this);
 			var calendar = _this.attr('data-calendar-id');
+			var url      = _this.attr('data-url');
 			if (!calendar){calendar = 1;}
+			if (!url){url = 'http://events.ucf.edu';}
 			
 			$.getUCFEvents({
 					'calendar_id' : calendar,
@@ -30,7 +32,7 @@ var __init__ = (function($){
 					var date  = $('<div />', {'class' : 'date'});
 					var month = $('<span />', {'class' : 'month'});
 					var day   = $('<span />', {'class' : 'day'});
-					var title = $('<a>', {'class' : 'title', 'href' : 'http://events.ucf.edu?eventdatetime_id='+e.id});
+					var title = $('<a>', {'class' : 'title', 'href' : url + '?eventdatetime_id='+e.id});
 					var end   = $('<div>', {'class' : 'end'});
 					
 					title.text(e.title);
