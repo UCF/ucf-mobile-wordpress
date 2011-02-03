@@ -95,17 +95,17 @@ ul{padding: 0; margin: 0; list-style-type: none;}
 .page-content #sub-pages ul li{margin: 8px 0; padding: 0;}
 .page-content #sub-pages ul li a{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif"; font-size: 16px;}
 
-.page-content .programs{padding: 0; margin: 0; list-style-type: none;}
-.page-content .programs li{display: block; float: left; width: 150px; margin-right: 10px;}
-.page-content .programs a{text-decoration: none; color: #333; font-weight: bold; font-size: 14px; font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
-.page-content .programs img{}
-.page-content .programs .caption{color: #333;}
-
 #faculty-resources{}
 #faculty-resources article div{margin-bottom: 30px;}
 #faculty-resources ul a{color: #333;}
 #faculty-resources ul{margin-bottom: 30px;}
 #faculty-resources #full-list{font-weight: bold; color: #333;}
+
+.faculty-award-programs{}
+.faculty-award-programs ul{padding: 0; margin: 0; list-style-type: none;}
+.faculty-award-programs ul li{display: block; float: left; margin-right: 10px; width: 150px; height: 200px;}
+.faculty-award-programs ul li a{text-decoration: none; color: #333; font-weight: bold; font-size: 14px; font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
+.faculty-award-programs .caption{color: #333;}
 
 #forms-policies-procedures h3{}
 #forms-policies-procedures .form-list{margin-bottom: 15px;}

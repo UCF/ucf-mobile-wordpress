@@ -26,7 +26,8 @@ abstract class ProvostCustomPostType{
 		$use_thumbnails = False,
 		$use_editor     = False,
 		$use_order      = False,
-		$use_title      = False;
+		$use_title      = False,
+		$use_metabox    = False;
 	
 	public function options($key){
 		$vars = get_object_vars($this);
@@ -66,11 +67,31 @@ abstract class ProvostCustomPostType{
 	}
 	
 	public function metabox(){
-		return;
+		if ($this->options('use_metabox')){
+			return array(
+				'id'       => $this->options('name').'_metabox',
+				'title'    => __($this->options('singular_name').' Attributes'),
+				'page'     => $this->options('name'),
+				'context'  => 'normal',
+				'priority' => 'high',
+				'fields'   => $this->fields(),
+			);
+		}
+		return null;
 	}
 	
 	public function register_metaboxes(){
-		return;
+		if ($this->options('use_metabox')){
+			$metabox = $this->metabox();
+			add_meta_box(
+				$metabox['id'],
+				$metabox['title'],
+				'provost_show_meta_boxes',
+				$metabox['page'],
+				$metabox['context'],
+				$metabox['priority']
+			);
+		}
 	}
 	
 	public function register(){
@@ -98,7 +119,8 @@ abstract class ProvostLink extends ProvostCustomPostType{
 		$edit_item      = 'Edit Form',
 		$new_item       = 'New Form',
 		$public         = True,
-		$use_title      = True;
+		$use_title      = True,
+		$use_metabox    = True;
 	
 	public function fields(){
 		return array(
@@ -108,29 +130,6 @@ abstract class ProvostLink extends ProvostCustomPostType{
 				'id'   => $this->options('name').'_url',
 				'type' => 'text',
 			),
-		);
-	}
-	
-	public function metabox(){
-		return array(
-			'id'       => $this->options('name').'_metabox',
-			'title'    => __('Form Attributes'),
-			'page'     => $this->options('name'),
-			'context'  => 'normal',
-			'priority' => 'high',
-			'fields'   => $this->fields(),
-		);
-	}
-	
-	public function register_metaboxes(){
-		$metabox = $this->metabox();
-		add_meta_box(
-			$metabox['id'],
-			$metabox['title'],
-			'provost_show_meta_boxes',
-			$metabox['page'],
-			$metabox['context'],
-			$metabox['priority']
 		);
 	}
 }
@@ -185,22 +184,11 @@ class ProvostHomeImages extends ProvostCustomPostType{
 		$new_item       = 'New Home Image',
 		$public         = True,
 		$use_thumbnails = True,
-		$use_title      = True;
-	
-	public function metabox(){
-		return array(
-			'id'       => $this->options('name').'_metabox',
-			'title'    => __($this->options('singular_name').' Attributes'),
-			'page'     => $this->options('name'),
-			'context'  => 'normal',
-			'priority' => 'high',
-			'fields'   => $this->fields(),
-		);
-	}
+		$use_title      = True,
+		$use_metabox    = True;
 	
 	public function register_metaboxes(){
 		$metabox = $this->metabox();
-		
 		global $wp_meta_boxes;
 		remove_meta_box('postimagediv', $metabox['page'], 'side');
 		add_meta_box('postimagediv', __('Home Image'), 'post_thumbnail_meta_box', $metabox['page'], 'normal', 'high');
@@ -218,7 +206,8 @@ class ProvostPerson extends ProvostCustomPostType{
 		$public         = True,
 		$use_categories = True,
 		$use_order      = True,
-		$use_title      = True;
+		$use_title      = True,
+		$use_metabox    = True;
 	
 	public function fields(){
 		return array(
@@ -231,37 +220,18 @@ class ProvostPerson extends ProvostCustomPostType{
 		);
 	}
 	
-	public function metabox(){
-		return array(
-			'id'       => $this->options('name').'_metabox',
-			'title'    => __('Person Attributes'),
-			'page'     => $this->options('name'),
-			'context'  => 'normal',
-			'priority' => 'high',
-			'fields'   => $this->fields(),
-		);
-	}
-	
 	public function register_metaboxes(){
 		$metabox = $this->metabox();
-		
 		global $wp_meta_boxes;
 		remove_meta_box('postimagediv', $metabox['page'], 'side');
 		add_meta_box('postimagediv', __('Person Image'), 'post_thumbnail_meta_box', $metabox['page'], 'normal', 'high');
 		
-		add_meta_box(
-			$metabox['id'],
-			$metabox['title'],
-			'provost_show_meta_boxes',
-			$metabox['page'],
-			$metabox['context'],
-			$metabox['priority']
-		);
+		parent::register_metaboxes();
 	}
 }
 
 
-class ProvostUnit extends ProvostCustomPostType{
+class ProvostUnit extends ProvostLink{
 	public
 		$name           = 'provost_unit',
 		$plural_name    = 'Colleges/Units',
@@ -270,46 +240,42 @@ class ProvostUnit extends ProvostCustomPostType{
 		$edit_item      = 'Edit College/Unit',
 		$new_item       = 'New College/Unit',
 		$public         = True,
+		$use_metabox    = True,
 		$use_categories = True,
 		$use_thumbnails = True,
 		$use_title      = True;
-		
-	public function fields(){
-		return array(
-			array(
-				'name' => __('URL'),
-				'desc' => __('Web address of the college/unit'),
-				'id'   => $this->options('name').'_url',
-				'type' => 'text',
-			),
-		);
-	}
-	
-	public function metabox(){
-		return array(
-			'id'       => $this->options('name').'_metabox',
-			'title'    => __('College or Unit Attributes'),
-			'page'     => $this->options('name'),
-			'context'  => 'normal',
-			'priority' => 'high',
-			'fields'   => $this->fields(),
-		);
-	}
 	
 	public function register_metaboxes(){
 		$metabox = $this->metabox();
-		add_meta_box(
-			$metabox['id'],
-			$metabox['title'],
-			'provost_show_meta_boxes',
-			$metabox['page'],
-			$metabox['context'],
-			$metabox['priority']
-		);
-		
 		global $wp_meta_boxes;
 		remove_meta_box('postimagediv', $metabox['page'], 'side');
 		add_meta_box('postimagediv', __('College or Unit Image'), 'post_thumbnail_meta_box', $metabox['page'], 'normal', 'high');
+		parent::register_metaboxes();
+	}
+}
+
+
+class ProvostAwardProgram extends ProvostLink{
+	public
+		$name           = 'provost_award',
+		$plural_name    = 'Award Programs',
+		$singular_name  = 'Award Program',
+		$add_new_item   = 'Add Award Program',
+		$edit_item      = 'Edit Award Program',
+		$new_item       = 'New Award Program',
+		$public         = True,
+		$use_metabox    = True,
+		$use_thumbnails = True,
+		$use_title      = True;
+	
+	public function register_metaboxes(){
+		$metabox = $this->metabox();
+		
+		global $wp_meta_boxes;
+		remove_meta_box('postimagediv', $metabox['page'], 'side');
+		add_meta_box('postimagediv', __('Award Program Image'), 'post_thumbnail_meta_box', $metabox['page'], 'normal', 'high');
+		
+		parent::register_metaboxes();
 	}
 }
 
@@ -325,6 +291,7 @@ function installed_custom_post_types(){
 		'ProvostHomeImages',
 		'ProvostForm',
 		'ProvostHelp',
+		'ProvostAwardProgram',
 	);
 	
 	return array_map(create_function('$class', '
@@ -404,7 +371,6 @@ function provost_show_meta_boxes($post){
 			break;
 		}
 	}
-	
 	return _show_meta_boxes($post, $meta_box);
 }
 
@@ -456,7 +422,6 @@ function _show_meta_boxes($post, $meta_box){
 	echo '<input type="hidden" name="provost_meta_box_nonce" value="', wp_create_nonce(basename(__FILE__)), '" />';
 	
 	echo '<table class="form-table">';
-	
 	foreach ($meta_box['fields'] as $field) {
 		// get current post meta data
 		$meta = get_post_meta($post->ID, $field['id'], true);

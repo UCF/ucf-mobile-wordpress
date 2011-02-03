@@ -2,6 +2,7 @@
 # Custom Child Theme Functions
 # http://themeshaper.com/thematic-for-wordpress/guide-customizing-thematic-theme-framework/
 require_once('custom-post-types.php');
+require_once('shortcodes.php');
 
 define('PROVOST_THEME_URL', get_bloginfo('stylesheet_directory'));
 define('PROVOST_STATIC_URL', PROVOST_THEME_URL.'/static');
@@ -151,7 +152,6 @@ add_action('wp_footer', 'provost_footer');
  **/
 function get_custom_post_type($class){
 	$installed = installed_custom_post_types();
-	
 	foreach($installed as $object){
 		if (get_class($object) == $class){
 			return $object->options('name');
