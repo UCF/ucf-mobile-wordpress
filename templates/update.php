@@ -8,8 +8,8 @@
 		<![endif]-->
 		
 		<title><?php the_title()?></title> 
-		<meta name="description" content="">
-		<meta charset="utf-8">
+		<meta name="description" content="Updates from the Office of the Provost at the University of Central Florida.">
+		<?php thematic_create_contenttype();?>
 		<link rel="shortcut icon" href="<?=PROVOST_IMG_URL?>/favicon.ico">
 		<?=provost_create_stylesheet('')?>
 		<?php thematic_create_stylesheet();?>
