@@ -98,7 +98,7 @@ add_filter('thematic_create_doctype', 'provost_create_doctype');
 #Set utf-8 meta charset
 function provost_create_contenttype(){
 	$content  = "\t<meta charset='utf-8'>\n";
-	$content .= "\t<meta http-equiv='X-UA-COMPATIBLE' content='IE=edge'>\n";
+	$content .= "\t<meta http-equiv='X-UA-COMPATIBLE' content='IE=IE8'>\n";
 	return $content;
 }
 add_filter('thematic_create_contenttype', 'provost_create_contenttype');
