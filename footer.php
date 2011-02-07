@@ -14,7 +14,7 @@
 				)?>
 			</div>
 			<div class="span-12">
-				<a id="ucf-logo" href="http://www.ucf.edu"><img src="<?=PROVOST_IMG_URL?>/sfo_stacked.jpg" alt="ucf" /></a>
+				<a id="ucf-logo" href="http://www.ucf.edu"><img src="<?=PROVOST_IMG_URL?>/sfo-stacked.jpg" alt="ucf" /></a>
 			</div>
 			<div class="span-12 last text">
 				<p>Site Maintained by the Office of the Provost and Vice President for<br />Academic Affairs.</p>

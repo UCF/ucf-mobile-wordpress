@@ -23,7 +23,7 @@ a img{border:0}
 #main_body a:hover{color:#e50606; text-decoration:none; border-bottom:#e50606}
 
 #footer{clear:both; text-align:center; font-family:Helvetica, Arial, sans-serif; border-top: 1px dotted black;}
-#footer a#ucf-logo{display:block; height:109px; width:278px; text-indent:-9000px; background:url(../img/sfo_stacked.jpg) no-repeat;}
+#footer a#ucf-logo{display:block; height:109px; width:278px; text-indent:-9000px; background:url(../img/sfo-stacked.jpg) no-repeat;}
 #footer .text{text-align: right; font-size: 14px;}
 
 

@@ -21,7 +21,7 @@
 		<?php the_post();?>
 		<div id="updates">
 			<div id="header">
-				<h1><?php the_title();?></h1>
+				<h1>Provost&#146;s Update</h1>
 				<div class="date"><?=date('l, F j, Y', strtotime($post->post_date))?></div>
 				<div class="end"><!-- --></div>
 			</div>
