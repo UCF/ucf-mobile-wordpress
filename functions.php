@@ -99,6 +99,14 @@ add_filter('thematic_create_doctype', 'provost_create_doctype');
 function provost_create_contenttype(){
 	$content  = "\t<meta charset='utf-8'>\n";
 	$content .= "\t<meta http-equiv='X-UA-COMPATIBLE' content='IE=IE8'>\n";
+	ob_start();
+	?>
+	<!--[if IE]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<style>article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}</style>
+	<![endif]-->
+<?php
+	$content .= ob_get_clean();
 	return $content;
 }
 add_filter('thematic_create_contenttype', 'provost_create_contenttype');

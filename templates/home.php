@@ -92,7 +92,7 @@
 				
 				<!-- Academic Units-->
 				<div id="home-units" class="span-6 last">
-					<h3>Academic Affairs Units</h3>
+					<h3>Academic&nbsp;Affairs&nbsp;Units</h3>
 					<ul>
 						<?php foreach(get_posts(array(
 							'numberposts' => -1,

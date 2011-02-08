@@ -23,7 +23,7 @@
 		?>
 		<?php foreach($forms as $form):?>
 		<li class="pdf">
-			<a href="<?=get_post_meta($form->ID, $provost_forms->options('name').'_url')?>"><?=$form->post_title?></a>
+			<a href="<?=get_post_meta($form->ID, $provost_forms->options('name').'_url', True)?>"><?=$form->post_title?></a>
 		</li>
 		<?php endforeach;?>
 	</ul>
