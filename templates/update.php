@@ -4,14 +4,15 @@
 		<!--[if IE]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<style>article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}</style>
-		<link href="http://cdn.ucf.edu/webcom/-/css/blueprint-ie.css" rel="stylesheet" media="screen, projection">
 		<![endif]-->
 		
-		<title><?php the_title()?></title> 
-		<meta name="description" content="Updates from the Office of the Provost at the University of Central Florida.">
+		<title><?php the_title()?></title>
 		<?php thematic_create_contenttype();?>
+		<meta name="description" content="Updates from the Office of the Provost at the University of Central Florida.">
+		<link rel='stylesheet' type='text/css' href='http://universityheader.ucf.edu/bar/css/bar.css' media='all' />
+		<!-- Template CSS -->
+		<link rel='stylesheet' type='text/css' href='".PROVOST_CSS_URL."/webcom-template.css' media='screen, projection' />
 		<link rel="shortcut icon" href="<?=PROVOST_IMG_URL?>/favicon.ico">
-		<?=provost_create_stylesheet('')?>
 		<?php thematic_create_stylesheet();?>
 	</head>
 	<!--[if IE 7 ]><body class="ie7 ie"><![endif]-->
@@ -56,9 +57,5 @@
 		
 		<!-- Footer Scripts -->
 		<script src="http://universityheader.ucf.edu/bar/js/university-header.js" type="text/javascript" charset="utf-8"></script>
-		<script src="http://cdn.ucf.edu/webcom/-/js/jquery.js" type="text/javascript" charset="utf-8"></script>
-		<script src="http://cdn.ucf.edu/webcom/-/js/jquery-browser.js" type="text/javascript" charset="utf-8"></script>
-		<script src="http://cdn.ucf.edu/webcom/-/js/jquery-uniform.js" type="text/javascript" charset="utf-8"></script>
-		<script src="http://cdn.ucf.edu/webcom/-/js/jquery-ui.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 </html>

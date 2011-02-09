@@ -5,7 +5,6 @@
 		<h2 class="span-24 last"><?php the_title();?></h2>
 		
 		<div id="left" class="span-6 append-1">
-			
 			<!-- Sub-page List-->
 			<?php $children = get_pages(array(
 				'child_of'    => $post->ID,
