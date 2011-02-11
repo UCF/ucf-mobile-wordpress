@@ -30,7 +30,6 @@ $LINKS = array(
 
 #Sets scripts to be loaded at bottom of page
 $SCRIPTS = array(
-	"<!--[if IE]><script src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script><![endif]-->",
 	"<script src='http://universityheader.ucf.edu/bar/js/university-header.js' type='text/javascript' ></script>",
 	"\n\t<!-- jQuery UI Scripts -->",
 	"<script src='".PROVOST_JS_URL."/jquery-ui.js' type='text/javascript' ></script>",
