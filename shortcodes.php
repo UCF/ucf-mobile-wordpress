@@ -1,9 +1,9 @@
 <?php 
 
 /**
- * undocumented function
+ * Outputs a list of the provost updates
  *
- * @return void
+ * @return string
  * @author Jared Lang
  **/
 function sc_provost_updates(){
@@ -15,9 +15,9 @@ add_shortcode('sc-provost-updates', 'sc_provost_updates');
 
 
 /**
- * undocumented function
+ * Outputs the horizontal faculty award programs list.
  *
- * @return void
+ * @return string
  * @author Jared Lang
  **/
 function sc_faculty_award_programs($attrs){
@@ -29,9 +29,9 @@ add_shortcode('sc-faculty-award-programs', 'sc_faculty_award_programs');
 
 
 /**
- * undocumented function
+ * Outputs the Academic Officers and College Deans listings
  *
- * @return void
+ * @return string
  * @author Jared Lang
  **/
 function sc_org_chart(){
@@ -43,9 +43,10 @@ add_shortcode('sc-org-chart', 'sc_org_chart');
 
 
 /**
- * undocumented function
+ * Outputs forms, organized by the sub-category of 'Forms' they are related to.
+ * Uncategorized forms will not display.
  *
- * @return void
+ * @return string
  * @author Jared Lang
  **/
 function sc_forms(){
