@@ -49,10 +49,10 @@
 ?>
 <div id="org-chart">
 	<h2>Academic Affairs Organizational Structure</h2>
-	<a href="<?=get_post_meta($deans_list->ID, 'provost_form_url', True)?>">Download PDF Org Chart</a>
+	<a href="<?=get_post_meta($org_chart->ID, 'provost_form_url', True)?>">Download PDF <?=$org_chart->post_title?></a>
 	<?php display_people($academic_officers, 'academic-officers');?>
 	
 	<h2>College Deans</h2>
-	<a href="<?=get_post_meta($org_chart->ID, 'provost_form_url', True)?>">Download PDF Deans List</a>
+	<a href="<?=get_post_meta($deans_list->ID, 'provost_form_url', True)?>">Download PDF <?=$deans_list->post_title?></a>
 	<?php display_people($college_deans, 'college-deans');?>
 </div>
