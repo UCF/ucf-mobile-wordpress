@@ -112,7 +112,7 @@ abstract class ProvostCustomPostType{
 
 abstract class ProvostLink extends ProvostCustomPostType{
 	public
-		$name           = 'provost_form',
+		$name           = 'provost_link',
 		$plural_name    = 'Forms',
 		$singular_name  = 'Form',
 		$add_new_item   = 'Add Form',
