@@ -2,9 +2,8 @@
 <?php get_header(); the_post();?>
 	
 	<div class="page-content" id="<?=$post->post_name?>">
-		
+		<h2><?php the_title();?></h2>
 		<div id="left" class="span-6 append-1">
-			<h2><?php the_title();?></h2>
 			
 			<!-- Featured Image -->
 			<?php if(has_post_thumbnail() and get_the_title() == 'About the Provost'):?>
