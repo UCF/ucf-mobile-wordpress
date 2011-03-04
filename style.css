@@ -69,6 +69,16 @@ ul{padding: 0; margin: 0; list-style-type: none;}
 #home #widgets{padding-left: 15px;}
 
 
+/*/ Search results page /*/
+#search-results .hentry{margin: 10px 0; clear: both;}
+#search-results .hentry h2{ margin: 0 0 10px 0; padding: 0;}
+#search-results .hentry h2 a{color: #c00202; font-weight: bold; font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif; font-size: 18px; text-decoration: none;}
+#search-results .hentry .entry-content{font-size: 14px; line-height: 1.5em;}
+#search-results .hentry .entry-content .entry-thumb img{display: block; margin: 5px 10px 20px 0; border: 1px solid #999; float: left;}
+#search-results .hentry .entry-utility,
+#search-results .hentry .entry-meta{display: none;}
+
+
 /*/ Academic Affairs Styles /*/
 #org-chart{margin-top: 1em;}
 #org-chart h2{font-family: "Helvetica Neue", "Helvetica", "sans-serif"; font-size: 18px; font-weight: bold; display: inline-block;}
