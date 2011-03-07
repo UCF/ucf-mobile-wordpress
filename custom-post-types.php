@@ -1,5 +1,5 @@
 <?php
-/*/ The base abstract ProvostCustomPostType covers a really simple post type,
+/*/ The base abstract CustomPostType covers a really simple post type,
 one that does not require additional fields and metaboxes.  This means that
 any object that inherits from this base class can safely ignore most of the
 methods defined in it, and if it needs those additional methods it should
@@ -13,9 +13,9 @@ installed_custom_post_types;
 /*/----------------------------------
 Custom post types
 ----------------------------------/*/
-abstract class ProvostCustomPostType{
+abstract class CustomPostType{
 	public 
-		$name           = 'provost_custom_post_type',
+		$name           = 'mobile_custom_post_type',
 		$plural_name    = 'Custom Posts',
 		$singular_name  = 'Custom Post',
 		$add_new_item   = 'Add New Custom Post',
@@ -86,7 +86,7 @@ abstract class ProvostCustomPostType{
 			add_meta_box(
 				$metabox['id'],
 				$metabox['title'],
-				'provost_show_meta_boxes',
+				'mobile_show_meta_boxes',
 				$metabox['page'],
 				$metabox['context'],
 				$metabox['priority']
@@ -110,23 +110,25 @@ abstract class ProvostCustomPostType{
 	}
 }
 
-abstract class ProvostLink extends ProvostCustomPostType{
+
+class NativeApp extends CustomPostType{
 	public
-		$name           = 'provost_link',
-		$plural_name    = 'Forms',
-		$singular_name  = 'Form',
-		$add_new_item   = 'Add Form',
-		$edit_item      = 'Edit Form',
-		$new_item       = 'New Form',
+		$name           = 'mobile_native_app',
+		$plural_name    = 'Native Apps',
+		$singular_name  = 'Native App',
+		$add_new_item   = 'Add Native App',
+		$edit_item      = 'Edit Native App',
+		$new_item       = 'New Native App',
 		$public         = True,
-		$use_title      = True,
-		$use_metabox    = True;
+		$use_thumbnails = True,
+		$use_metabox    = True,
+		$use_title      = True;
 	
 	public function fields(){
 		return array(
 			array(
-				'name' => __('url'),
-				'desc' => __('URL'),
+				'name' => __('URL'),
+				'desc' => __('Application URL'),
 				'id'   => $this->options('name').'_url',
 				'type' => 'text',
 			),
@@ -134,148 +136,28 @@ abstract class ProvostLink extends ProvostCustomPostType{
 	}
 }
 
-
-class ProvostHelp extends ProvostLink{
+class AppImage extends CustomPostType{
 	public
-		$name           = 'provost_help',
-		$plural_name    = 'Help',
-		$singular_name  = 'Help',
-		$add_new_item   = 'Add Help',
-		$edit_item      = 'Edit Help',
-		$new_item       = 'New Help',
-		$public         = True;
-}
-
-
-class ProvostForm extends ProvostLink{
-	public
-		$name           = 'provost_form',
-		$plural_name    = 'Forms',
-		$singular_name  = 'Form',
-		$add_new_item   = 'Add Form',
-		$edit_item      = 'Edit Form',
-		$new_item       = 'New Form',
-		$public         = True,
-		$use_categories = True;
-}
-
-
-class ProvostUpdate extends ProvostCustomPostType{
-	public
-		$name           = 'provost_update',
-		$plural_name    = 'Updates',
-		$singular_name  = 'Update',
-		$add_new_item   = 'Add Update',
-		$edit_item      = 'Edit Update',
-		$new_item       = 'New Update',
-		$public         = True,
-		$use_editor     = True,
-		$use_title      = True;
-}
-
-
-class ProvostHomeImages extends ProvostCustomPostType{
-	public
-		$name           = 'provost_home_images',
-		$plural_name    = 'Home Images',
-		$singular_name  = 'Home Image',
-		$add_new_item   = 'Add Home Image',
-		$edit_item      = 'Edit Home Image',
-		$new_item       = 'New Home Image',
+		$name           = 'mobile_app_image',
+		$plural_name    = 'App Images',
+		$singular_name  = 'App Image',
+		$add_new_item   = 'Add App Image',
+		$edit_item      = 'Edit App Image',
+		$new_item       = 'New App Image',
 		$public         = True,
 		$use_thumbnails = True,
-		$use_title      = True,
-		$use_metabox    = True;
-	
-	public function register_metaboxes(){
-		$metabox = $this->metabox();
-		global $wp_meta_boxes;
-		remove_meta_box('postimagediv', $metabox['page'], 'side');
-		add_meta_box('postimagediv', __('Home Image'), 'post_thumbnail_meta_box', $metabox['page'], 'normal', 'high');
-	}
-}
-
-class ProvostPerson extends ProvostCustomPostType{
-	public
-		$name           = 'provost_person',
-		$plural_name    = 'People',
-		$singular_name  = 'Person',
-		$add_new_item   = 'Add Person',
-		$edit_item      = 'Edit Person',
-		$new_item       = 'New Person',
-		$public         = True,
-		$use_categories = True,
-		$use_order      = True,
 		$use_title      = True,
 		$use_metabox    = True;
 	
 	public function fields(){
 		return array(
 			array(
-				'name' => __('Description'),
-				'desc' => __('Position, title, etc.'),
-				'id'   => $this->options('name').'_description',
+				'name' => __('Caption'),
+				'desc' => __('Image Caption'),
+				'id'   => $this->options('name').'_caption',
 				'type' => 'text',
 			),
 		);
-	}
-	
-	public function register_metaboxes(){
-		$metabox = $this->metabox();
-		global $wp_meta_boxes;
-		remove_meta_box('postimagediv', $metabox['page'], 'side');
-		add_meta_box('postimagediv', __('Person Image'), 'post_thumbnail_meta_box', $metabox['page'], 'normal', 'high');
-		
-		parent::register_metaboxes();
-	}
-}
-
-
-class ProvostUnit extends ProvostLink{
-	public
-		$name           = 'provost_unit',
-		$plural_name    = 'Colleges/Units',
-		$singular_name  = 'College/Unit',
-		$add_new_item   = 'Add College/Unit',
-		$edit_item      = 'Edit College/Unit',
-		$new_item       = 'New College/Unit',
-		$public         = True,
-		$use_metabox    = True,
-		$use_categories = True,
-		$use_thumbnails = True,
-		$use_title      = True;
-	
-	public function register_metaboxes(){
-		$metabox = $this->metabox();
-		global $wp_meta_boxes;
-		remove_meta_box('postimagediv', $metabox['page'], 'side');
-		add_meta_box('postimagediv', __('College or Unit Image'), 'post_thumbnail_meta_box', $metabox['page'], 'normal', 'high');
-		parent::register_metaboxes();
-	}
-}
-
-
-class ProvostAwardProgram extends ProvostLink{
-	public
-		$name           = 'provost_award',
-		$plural_name    = 'Award Programs',
-		$singular_name  = 'Award Program',
-		$add_new_item   = 'Add Award Program',
-		$edit_item      = 'Edit Award Program',
-		$new_item       = 'New Award Program',
-		$public         = True,
-		$use_metabox    = True,
-		$use_thumbnails = True,
-		$use_title      = True;
-	
-	public function register_metaboxes(){
-		$metabox = $this->metabox();
-		
-		global $wp_meta_boxes;
-		remove_meta_box('postimagediv', $metabox['page'], 'side');
-		add_meta_box('postimagediv', __('Award Program Image'), 'post_thumbnail_meta_box', $metabox['page'], 'normal', 'high');
-		
-		parent::register_metaboxes();
 	}
 }
 
@@ -284,15 +166,7 @@ class ProvostAwardProgram extends ProvostLink{
 Register custom post types and functions for display
 -------------------------------------/*/
 function installed_custom_post_types(){
-	$installed = array(
-		'ProvostUnit',
-		'ProvostPerson',
-		'ProvostUpdate',
-		'ProvostHomeImages',
-		'ProvostForm',
-		'ProvostHelp',
-		'ProvostAwardProgram',
-	);
+	$installed = array('NativeApp', 'AppImage');
 	
 	return array_map(create_function('$class', '
 		return new $class;
@@ -306,7 +180,7 @@ function installed_custom_post_types(){
  * @return void
  * @author Jared Lang
  **/
-function provost_post_types(){
+function mobile_post_types(){
 	#Register custom post types
 	foreach(installed_custom_post_types() as $custom_post_type){
 		$custom_post_type->register();
@@ -318,7 +192,7 @@ function provost_post_types(){
 	#Override default page post type to use categories
 	register_taxonomy_for_object_type('category', 'page');
 }
-add_action('init', 'provost_post_types');
+add_action('init', 'mobile_post_types');
 
 
 /**
@@ -327,13 +201,13 @@ add_action('init', 'provost_post_types');
  * @return void
  * @author Jared Lang
  **/
-function provost_meta_boxes(){
+function mobile_meta_boxes(){
 	#Register custom post types metaboxes
 	foreach(installed_custom_post_types() as $custom_post_type){
 		$custom_post_type->register_metaboxes();
 	}
 }
-add_action('do_meta_boxes', 'provost_meta_boxes');
+add_action('do_meta_boxes', 'mobile_meta_boxes');
 
 
 /**
@@ -342,7 +216,7 @@ add_action('do_meta_boxes', 'provost_meta_boxes');
  * @return void
  * @author Jared Lang
  **/
-function provost_save_meta_data($post){
+function mobile_save_meta_data($post){
 	#Register custom post types metaboxes
 	foreach(installed_custom_post_types() as $custom_post_type){
 		if (get_post_type($post) == $custom_post_type->options('name')){
@@ -354,7 +228,7 @@ function provost_save_meta_data($post){
 	return _save_meta_data($post, $meta_box);
 	
 }
-add_action('save_post', 'provost_save_meta_data');
+add_action('save_post', 'mobile_save_meta_data');
 
 
 /**
@@ -363,7 +237,7 @@ add_action('save_post', 'provost_save_meta_data');
  * @return void
  * @author Jared Lang
  **/
-function provost_show_meta_boxes($post){
+function mobile_show_meta_boxes($post){
 	#Register custom post types metaboxes
 	foreach(installed_custom_post_types() as $custom_post_type){
 		if (get_post_type($post) == $custom_post_type->options('name')){
@@ -382,7 +256,7 @@ function provost_show_meta_boxes($post){
  **/
 function _save_meta_data($post_id, $meta_box){
 	// verify nonce
-	if (!wp_verify_nonce($_POST['provost_meta_box_nonce'], basename(__FILE__))) {
+	if (!wp_verify_nonce($_POST['mobile_meta_box_nonce'], basename(__FILE__))) {
 		return $post_id;
 	}
 
@@ -419,7 +293,7 @@ function _save_meta_data($post_id, $meta_box){
  **/
 function _show_meta_boxes($post, $meta_box){
 	// Use nonce for verification
-	echo '<input type="hidden" name="provost_meta_box_nonce" value="', wp_create_nonce(basename(__FILE__)), '" />';
+	echo '<input type="hidden" name="mobile_meta_box_nonce" value="', wp_create_nonce(basename(__FILE__)), '" />';
 	
 	echo '<table class="form-table">';
 	foreach ($meta_box['fields'] as $field) {

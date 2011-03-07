@@ -1,58 +1,23 @@
-<?php disallow_direct_load('header.php');?>
-<?php
-	// Creating the doctype
-	thematic_create_doctype();
-	echo " ";
-	language_attributes();
-	echo ">\n";
-	
-	// Creating the head profile
-	thematic_head_profile();
-	// Creating the doc title
-	thematic_doctitle();
-	// Creating the content type
-	thematic_create_contenttype();
-	// Creating the description
-	thematic_show_description();
-	// Creating the robots tags
-	thematic_show_robots();
-	// Creating the canonical URL
-	thematic_canonical_url();
-	
-	if (THEMATIC_COMPATIBLE_FEEDLINKS) {
-		// Creating the internal RSS links
-		thematic_show_rss();
-		
-		// Creating the comments RSS links
-		thematic_show_commentsrss();
-	}
-	
-	// Creating the pingback adress
-	thematic_show_pingback();
-	// Enables comment threading
-	thematic_show_commentreply();
-	// Calling WordPress' header action hook
-	wp_head();
-	// Loading the stylesheet
-	thematic_create_stylesheet();
-
-?>
-</head>
-
-<?php
-	thematic_body();
-?>
-	<div id="wrap">
-		<div id="header" class="span-24 last">
-			<h1 class="span-9"><a href="<?php bloginfo('url')?>"><?php bloginfo('name')?></a></h1>
-			<div class="span-15 last" id="menu">
-				<?=preg_replace(
-					'/<li[^>]*>([^<]*<[^>]+>[^<]+<[^>]+>)<\/li>[\s]*<\/ul>/',
-					'<li class="last">$1</ul>',
-					wp_nav_menu(array('container_class' => 'menu', 'echo' => False,))
-				)?>
-				<div class="end"><!-- --></div>
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8">
+		<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<style>article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}</style>
+		<![endif]-->
+		<?php ob_start();
+		thematic_doctitle();
+		thematic_show_description();
+		thematic_show_robots();
+		thematic_canonical_url();
+		thematic_create_stylesheet();
+		thematic_head_scripts();
+		cleanup(ob_get_clean(), 2);?>
+	</head>
+	<?=thematic_body()?>
+		<div class="container">
+			<div id="header" class="span-24 last">
+				<h1 class="span-12 brand"><span class="standout">UCF</span>Mobile</h1>
+				<div class="span-12 last url"><a href="/home">m.ucf.edu</a></div>
 			</div>
-		</div>
-		
-		<div class="span-24 last">

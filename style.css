@@ -1,5 +1,5 @@
 /*   
-Theme Name: Office of the Provost, UCF
+Theme Name: Mobile, UCF
 Author: UCF Web Communications
 Template: thematic
 Version: 1.0
@@ -8,164 +8,66 @@ Tags: Thematic
 */
 
 /*/ Global Styles /*/
-#header h1 a{font-size: 37px; font-family: "Adobe Caslon Pro", "Georgia", "serif"; color: #313130;}
-body{color: #333333;}
-a{color: #333; font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
-h2, h3, h4{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif"; color: #333;}
-.slideshow {position: relative;}
-.slideshow img { position:absolute; top:0; left:0; z-index:8; opacity:0.0; }
-.slideshow img.active { z-index:10; opacity:1.0; }
-.slideshow img.last-active { z-index:9; }
-.pdf{background: transparent url('static/img/pdf.png') no-repeat center left; overflow:hidden; padding: 5px 5px 5px 25px;}
-.pdf a{text-decoration: underline; color: #333;}
-.required{font-weight: bold; font-size: 12px; color: #A00;}
-.required:after{content: ')';}
-.required:before{content: '(';}
-.optional{font-weight: bold; font-size: 12px; color: #aaa;}
-.optional:after{content: ')';}
-.optional:before{content: '(';}
-#footer{margin-top: 20px;}
-ul{padding: 0; margin: 0; list-style-type: none;}
+/*/ Page-wide /*/
+body{background-color: #000; color: #fff; font-family: "Georgia", "serif"; font-size: 15px; line-height: 1.5em;}
 
 
-/*/ Home Page /*/
-#home #top{}
-#home #top #quote{font-size: 23px; text-align: right; padding-right: 10px; font-weight: normal; font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
-#home #top #quote p{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
-#home #top #announcements{margin: 10px 0 17px 0;}
-.msie #home #top #announcements{margin: 10px 0 13px 0;}
-.firefox #home #top #announcements{margin: 10px 0 10px 0;}
-.chrome #home #top #announcements,
-.safari #home #top #announcements{margin: 10px 0 15px 0;}
-#home #top #announcements ul{list-style-type: none; padding: 0; margin: 0; font-size: 14px;}
-#home #top #announcements ul li{white-space: nowrap; margin: 0; line-height: 1em;}
-#home #top #help {background-color: #e1e1e1; padding: 8px 30px 0 30px; height: 50px;}
-#home #top #help select{display: block; width: 75%;}
-#home #top #help label{display: block; font-weight: normal; color: #c14d00; font-family: "Georgia", "serif"; text-decoration: underline;}
-#home #top #searchform{}
-#home #top #searchform div{background-color: #e1e1e1; padding: 5px 30px; height: 60px;}
-#home #top #searchform label{display: block; font-weight: normal; color: #c14d00; font-family: "Georgia", "serif"; text-decoration: underline;}
-#home #top #searchform input[type='submit']{width: 20%;}
-#home #top #searchform input[type='search']{width: 75%;}
-#home #middle{margin: 30px 0 10px 0;}
-#home #middle ul{padding: 0; margin: 0; list-style-type: none;}
-#home #middle ul li{}
-#home #middle ul li a{text-decoration: none; font-size: 16px; font-weight: normal;}
-#home #middle ul li a .title{}
-#home #bottom{border-top: 1px solid #e1e1e1; padding-top: 10px;}
-#home #bottom #links{border-right: 1px solid #e1e1e1;}
-#home h2{font-size: 10px; text-transform: uppercase; font-weight: normal; letter-spacing: 2px;}
-#home-colleges h3,
-#home-units h3{color: #666666; font-family: "Georgia", "serif"; font-size: 21px; font-weight: normal;}
-#home-colleges ul,
-#home-units ul{padding: 0; margin: 0; list-style-type: none;}
-#home-colleges ul li a,
-#home-units ul li a{display: block; height: 90px; width: 110px; color: #fff; text-decoration: none; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; font-size: 14px;}
-#home-colleges ul li a img,
-#home-units ul li a img{z-index: -1; position: absolute; background-color: #000;}
-#home-colleges ul .college .name,
-#home-units ul .unit .name{display: block; padding: 5px; overflow: hidden; text-shadow: #000 0px 0px 4px; font-weight: 500;}
-#home #widgets h3{font-family: "Helvetica Neue", "Helvetica", "sans-serif";}
-#home #widgets{padding-left: 15px;}
+/*/ Heading /*/
+#header{margin-top: 40px; font-family: "Helvetica Neue", "Helvetica", "sans-serif";}
+#header h1{font-style: normal;}
+#header .brand{color: #fff; font-size: 52px;  font-weight: 300;}
+#header .brand .standout{font-weight: bold; color: #ffc907;}
+#header .url a{display: block; font-size: 36px; color: #ffc907; font-weight: 100; text-align: right; text-decoration: none;}
 
 
-/*/ Search results page /*/
-#search-results .hentry{margin: 10px 0; clear: both;}
-#search-results .hentry h2{ margin: 0 0 10px 0; padding: 0;}
-#search-results .hentry h2 a{color: #c00202; font-weight: bold; font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif; font-size: 18px; text-decoration: none;}
-#search-results .hentry .entry-content{font-size: 14px; line-height: 1.5em;}
-#search-results .hentry .entry-content .entry-thumb img{display: block; margin: 5px 10px 20px 0; border: 1px solid #999; float: left;}
-#search-results .hentry .entry-utility,
-#search-results .hentry .entry-meta{display: none;}
+/*/ Content /*/
+#content{}
+#content #left{}
+#content #left #call-to-act{display: block; color: #000; font-size: 19px; font-family: "Helvetica", "sans-serif"; padding: 10px; width: 85%; background-color: #ffc907; margin-bottom: 30px; text-align: center; font-weight: bold; text-decoration: none;}
+#content #left p{font-weight: 100;}
+#content #left p a{color: #ffc907; text-decoration: underline;}
+#content #left h2{font-size: 15px; color: #fff; font-weight: 600; letter-spacing: 1px; font-family: "Helvetica", "sans-serif"; text-align: left;}
+#content #right img{margin: 0 0 0 19px;}
+#content #right .caption{font-size: 15px; font-family: "Helvetica", "sans-serif"; font-weight: 600; text-align: center;}
+#content #right .row{margin-bottom: 40px;}
+#content #right .col{}
 
 
-/*/ Academic Affairs Styles /*/
-#org-chart{margin-top: 1em;}
-#org-chart h2{font-family: "Helvetica Neue", "Helvetica", "sans-serif"; font-size: 18px; font-weight: bold; display: inline-block;}
-#org-chart a{font-size: 14px;}
-#org-chart .people{padding: 0; margin: 0; list-style-type: none;}
-#org-chart .person{display: block; float: left; width: 110px; height: 17em; margin-right: 15px;}
-#org-chart .person img{display: block;}
-#org-chart .person .name,
-#org-chart .person .description{font-family: "Helvetica Neue", "Helvetica", "sans-serif"; font-size: 14px; display: block;}
-#org-chart .person .name{font-weight: bold; margin-top: 10px;}
-#org-chart .end{clear: both;}
-#org-chart #academic-officers{}
-#org-chart #college-deans{}
+/*/ Footer /*/
+#footer{border-top: 1px solid #161616; margin-top: 50px; padding: 20px 0 20px 0;}
+#footer .logo a{display: block; height: 89px; width: 155px; text-indent: -1024px; background: transparent url(static/img/ucf-sfo.png) no-repeat; position: relative; top: -10px;}
+#footer .copyright{text-align: right; font-family: "Helvetica", "arial", "sans-serif"; font-size: 14px; color: #999;}
 
 
-/*/ Page Styles /*/
-.page-content{line-height: 1.5em;}
-.page-content h2{font-size: 27px; font-weight: 300; margin: 0 0 10px 0; padding: 0;}
-.page-content article{}
-.page-content article a{color: #953801;}
-.page-content article h1{font-size: 22px; font-weight: bold; padding: 0; margin: 0;}
-.page-content article h2{font-size: 18px; font-weight: bold;}
-.page-content article h2.subtitle{font-size: 18px; padding: 0 0 15px 0; margin: 0;  font-weight: 300;}
-.page-content article p {font-family: "Helvetica Neue", "Helvetica", "arial", "sans-serif";}
-.page-content #sub-pages ul{padding: 0; margin: 15px 0; list-style-type: none;}
-.page-content #sub-pages ul li{margin: 8px 0; padding: 0;}
-.page-content #sub-pages ul li a{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif"; font-size: 16px;}
+/*/ Menu /*/
+ul{border: none; margin: 0; padding: 0; font-weight: 300; list-style-type: none;}
+ul li{border: none; margin: 0; padding: 0;}
+ul li a{background-image: url('/media/img/chevron.png'); background-repeat: no-repeat; background-position: 100% 27px; border-bottom: 1px solid #161616; margin: 0; padding: 15px 20px; display: block; text-decoration: none; color: #fff;}
+ul li a:hover,
+ul li a:focus{color: #fff; background-color: #222; cursor: pointer;}
+ul li a .icon{display: block; float: left; width: 55px; position: relative; top: -3px;}
+.ie7 ul li a .heading{margin-top: -22px;}
+ul li a .heading,
+ul li a .description{display: block; margin-left: 70px;}
+ul li a .heading{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif"; font-size: 22px;}
+ul li a .description{font-family: "Georgia", "serif"; font-size: 13px; font-weight: normal; color: #eeeeee;}
 
-.faculty-award-programs{margin: 20px 0;}
-.faculty-award-programs ul{padding: 0; margin: 0; list-style-type: none;}
-.faculty-award-programs ul li{display: block; float: left; margin-right: 10px; width: 150px; height: 185px;}
-.faculty-award-programs ul li a{text-decoration: none; color: #333; font-weight: bold; font-size: 14px; font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
-.faculty-award-programs .caption{color: #333;}
+.gold{color: #FCC82D;}
+.bold{font-weight: bold;}
 
-#forms-policies-procedures h3{}
-#forms-policies-procedures .form-list{margin-bottom: 15px;}
-
-/*/ Update page styles /*/
-.ie7 #updates{}
-#updates{width: 630px; margin: 10px auto; font-family: "Georgia", "Times New Roman", "Times", "serif"; font-size: 14px; color: #3F3D3D;}
-#updates #header{border-bottom: 1px solid #999; color: #3F3D3D;}
-#updates #header h1{width: 400px; margin-right: 30px; float: left; font-family: "Arial", "sans-serif"; text-transform: uppercase; font-size: 30px; text-indent: -1024px; background: transparent url('static/img/provost-update.jpg') no-repeat 0 -20px;}
-#updates #header .date{margin-left: 430px; position: relative; top: 20px; text-align: right;}
-.ie7 #updates #header .date{top: 15px;}
-#updates #content{width: 390px; float: left;}
-#updates #sidebar{margin-left: 410px;}
-#updates #sidebar #tony-waldrop div{display: none;}
-#updates #sidebar #feedback{}
-#updates #sidebar #feedback h2{font-size: 15px; color: #666; text-align: center; padding: 10px; margin: 10px auto; border-top: 1px solid #999; width: 70%;}
-#updates #sidebar #feedback a{display: block; height: 113px; width: 212px; background: transparent url('static/img/feedback.jpg') no-repeat; text-indent: -2048px;}
-#updates #footer{border-top: 1px solid #ddd; color: #A1A1A1; font-size: 11px;  font-family: "Lucida Grande", "Arial", "sans-serif";}
-#updates #footer ul{padding: 0; margin: 0 0 5px 0;  font-family: "Lucida Grande", "Arial", "sans-serif";}
-#updates #footer ul li{display: inline;}
-#updates #footer ul .first{padding: 0;}
-#updates #footer a{color: #a1a1a1;}
-#updates .end{clear: both;}
-
-
-/*/ Widget Styles /*/
-#widgets ul{font-size: 12px; list-style-type: none; padding: 0; margin: 0;}
-#widgets a{color: #000;}
-#widgets h2{font-size: 16px; font-weight: bold;}
-#widgets h3{font-size: 16px; font-weight: normal;}
-#widgets h4{font-size: 14px; font-weight: bold;}
-#widgets ul,
-#widgets ol{padding: 0; margin: 0;}
-#widgets ul{list-style-type: none;}
-
-#widgets .blogroll{font-size: 14px;}
-#widgets .blogroll a{font-family: "Helvetica Neue", "Helvetica", "sans-serif";}
-
-#widgets .events h4{display: none;}
-#widgets .events,
-#widgets .events a{font-family: "Helvetica Neue", "Helvetica", "sans-serif";}
-#widgets .events ol{list-style-type: none;}
-#widgets .events li{margin: 15px 0;}
-#widgets .events .date{font-size: 16px; background-color: #fef7c8; color: #666666; font-weight: 500; padding: 8px 12px; display: table-cell;
-	-moz-box-shadow: 0px 0px 15px #ccc;
-	-webkit-box-shadow: 0px 0px 15px #ccc;
-	box-shadow: 0px 0px 15px #ccc;
-	font-family: "Helvetica Neue", "Helvetica", "sans-serif";
-}
-.msie #widgets .events .date{display: block; float: left; width: 30px;}
-.msie #widgets .events .date{border: 1px solid #ccc;}
-#widgets .events .date .day{font-size: 24px; display: block; margin-top: 10px;}
-#widgets .events .title{font-size: 14px; padding-left: 10px; display: table-cell;}
-.msie #widgets .events .title{display: block; margin-left: 50px;}
-.msie #widgets .events .end{clear: both;}
-#widgets .events .feeds,
-#widgets .events .more{display: none;}
+/*********************************************\
+    Ridiculous CSS3 button 
+\*********************************************/
+.button {
+    zoom: 1;
+    display:inline-block; color:white; background: #1d89e2;
+    -moz-border-radius: 8px; -webkit-border-radius: 8px; border-radius:8px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#FFCC0F), to(#D59200));
+    background: -moz-linear-gradient(top,  #FFCC0F,  #D59200); cursor:pointer;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFCC0F', endColorstr='#D59200', gradientType='0');}
+    
+#apps h3 { font-size:20px; color:white; margin-bottom:5px; }
+#apps ul { margin:0; padding:0 20px 20px; list-style:disc; color:white; }
+#apps ul li { background:none; margin:0; padding:0; color:white; line-height:1.8; }
+#apps ul li a { display:inline; background:none; margin:0; padding:0; border:0; }
+#apps ul li a span { border-bottom:1px solid #aaa; }

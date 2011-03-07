@@ -4,12 +4,14 @@
 require_once('custom-post-types.php');
 require_once('shortcodes.php');
 
-define('PROVOST_THEME_URL', get_bloginfo('stylesheet_directory'));
-define('PROVOST_STATIC_URL', PROVOST_THEME_URL.'/static');
-define('PROVOST_IMG_URL', PROVOST_STATIC_URL.'/img');
-define('PROVOST_JS_URL', PROVOST_STATIC_URL.'/js');
-define('PROVOST_CSS_URL', PROVOST_STATIC_URL.'/css');
-define('PROVOST_MISC_URL', PROVOST_STATIC_URL.'/misc');
+define('MOBILE_GA_ACCOUNT', 'UA-20711945-1');
+define('MOBILE_CB_ACCOUNT', '2806');
+define('MOBILE_CB_DOMAIN', 'm.ucf.edu');
+define('MOBILE_THEME_URL', get_bloginfo('stylesheet_directory'));
+define('MOBILE_STATIC_URL', MOBILE_THEME_URL.'/static');
+define('MOBILE_IMG_URL', MOBILE_STATIC_URL.'/img');
+define('MOBILE_JS_URL', MOBILE_STATIC_URL.'/js');
+define('MOBILE_CSS_URL', MOBILE_STATIC_URL.'/css');
 
 // Parent theme overrides and theme setttings
 // ------------------------------------------
@@ -17,29 +19,15 @@ define('PROVOST_MISC_URL', PROVOST_STATIC_URL.'/misc');
 #Sets link to be included in head
 $LINKS = array(
 	"<link rel='stylesheet' type='text/css' href='http://universityheader.ucf.edu/bar/css/bar.css' media='all' />",
-	"\n\t<!-- jQuery UI CSS -->",
-	"<link rel='stylesheet' type='text/css' href='".PROVOST_CSS_URL."/jquery-ui.css' media='screen, projection' />",
-	"<link rel='stylesheet' type='text/css' href='".PROVOST_CSS_URL."/jquery-uniform.css' media='screen, projection' />",
 	"\n\t<!-- Blueprint CSS -->",
-	"<link rel='stylesheet' type='text/css' href='".PROVOST_CSS_URL."/blueprint-screen.css' media='screen, projection' />",
-	"<link rel='stylesheet' type='text/css' href='".PROVOST_CSS_URL."/blueprint-print.css' media='print' />",
-	"<!--[if lt IE 8]><link rel='stylesheet' type='text/css' href='".PROVOST_CSS_URL."/blueprint-ie.css' media='screen, projection' /><![endif]-->",
-	"\n\t<!-- Template CSS -->",
-	"<link rel='stylesheet' type='text/css' href='".PROVOST_CSS_URL."/webcom-template.css' media='screen, projection' />",
+	"<link rel='stylesheet' type='text/css' href='".MOBILE_CSS_URL."/blueprint-screen.css' media='screen, projection' />",
+	"<link rel='stylesheet' type='text/css' href='".MOBILE_CSS_URL."/blueprint-print.css' media='print' />",
 );
 
 #Sets scripts to be loaded at bottom of page
 $SCRIPTS = array(
 	"<script src='http://universityheader.ucf.edu/bar/js/university-header.js' type='text/javascript' ></script>",
-	"\n\t<!-- jQuery UI Scripts -->",
-	"<script src='".PROVOST_JS_URL."/jquery-ui.js' type='text/javascript' ></script>",
-	"<script src='".PROVOST_JS_URL."/jquery-browser.js' type='text/javascript' ></script>",
-	"<script src='".PROVOST_JS_URL."/jquery-uniform.js' type='text/javascript' ></script>",
-	"<script src='http://events.ucf.edu/tools/script.js' type='text/javascript'></script>",
-	"<script type='text/javascript'>
-		var PROVOST_MISC_URL = '".PROVOST_MISC_URL."';
-	</script>",
-	"<script src='".PROVOST_JS_URL."/script.js' type='text/javascript'></script>",
+	"<script src='".MOBILE_JS_URL."/script.js' type='text/javascript'></script>",
 );
 
 
@@ -61,41 +49,34 @@ function remove_widgitized_areas($content){
 }
 add_action('thematic_widgetized_areas', 'remove_widgitized_areas');
 
-function provost_head_profile($profile){
+function mobile_head_profile($profile){
 	return "<head>";
 }
-add_filter('thematic_head_profile', 'provost_head_profile');
+add_filter('thematic_head_profile', 'mobile_head_profile');
 
 
-function provost_template_redirect(){
+function mobile_template_redirect(){
 	global $post;
-	$type  = $post->post_type;
-	$title = get_the_title();
-	switch($title){
+	switch($post->post_title){
 		case 'Home':
 			include('templates/home.php');
 			die();
 	}
-	switch($type){
-		case 'provost_update':
-			include('templates/update.php');
-			die();
-	}
 }
-add_filter('template_redirect', 'provost_template_redirect');
+add_filter('template_redirect', 'mobile_template_redirect');
 
 
 #Set html 5
-function provost_create_doctype() {
+function mobile_create_doctype() {
 	$content  = "<!DOCTYPE html>\n";
 	$content .= "<html";
     return $content;
 } // end thematic_create_doctype
-add_filter('thematic_create_doctype', 'provost_create_doctype');
+add_filter('thematic_create_doctype', 'mobile_create_doctype');
 
 
 #Set utf-8 meta charset
-function provost_create_contenttype(){
+function mobile_create_contenttype(){
 	$content  = "\t<meta charset='utf-8'>\n";
 	$content .= "\t<meta http-equiv='X-UA-COMPATIBLE' content='IE=IE8'>\n";
 	ob_start();
@@ -108,11 +89,11 @@ function provost_create_contenttype(){
 	$content .= ob_get_clean();
 	return $content;
 }
-add_filter('thematic_create_contenttype', 'provost_create_contenttype');
+add_filter('thematic_create_contenttype', 'mobile_create_contenttype');
 
 
 #Override default stylesheets
-function provost_create_stylesheet($links){
+function mobile_create_stylesheet($links){
 	global $LINKS;
 	$new_links = $LINKS;
 	
@@ -127,25 +108,34 @@ function provost_create_stylesheet($links){
 	
 	return "\t".implode("\n\t", $links)."\n";
 }
-add_filter('thematic_create_stylesheet', 'provost_create_stylesheet');
+add_filter('thematic_create_stylesheet', 'mobile_create_stylesheet');
 
 
 #Override default scripts
-function provost_head_scripts($scripts){}
-add_filter('thematic_head_scripts', 'provost_head_scripts');
+function mobile_head_scripts($scripts){
+	ob_start();?>
+	<script type="text/javascript">
+		var GA_ACCOUNT = '<?=MOBILE_GA_ACCOUNT?>';
+		var CB_ACCOUNT = <?=MOBILE_CB_ACCOUNT?>;
+		var CB_DOMAIN  = '<?=MOBILE_CB_DOMAIN?>';
+	</script>
+	<script src="<?=MOBILE_JS_URL?>/header.js" type='text/javascript'></script>
+	<?php return ob_get_clean();
+}
+add_filter('thematic_head_scripts', 'mobile_head_scripts');
 
 
 #Append scripts to bottom of page
-function provost_after(){
+function mobile_after(){
 	global $SCRIPTS;
 	print "\t".implode("\n\t", $SCRIPTS);
 }
-add_filter('thematic_after', 'provost_after');
+add_filter('thematic_after', 'mobile_after');
 
-function provost_footer(){
+function mobile_footer(){
 	print wp_nav_menu(thematic_nav_menu_args());
 }
-add_action('wp_footer', 'provost_footer');
+add_action('wp_footer', 'mobile_footer');
 
 
 // Theme custom functions
@@ -167,85 +157,18 @@ function get_custom_post_type($class){
 	return null;
 }
 
-
-/**
- * Returns pages associated with the menu defined by $c;
- *
- * @return array
- * @author Jared Lang
- **/
-function get_menu_pages($c){
-	return get_posts(array(
-		'numberposts' => -1,
-		'orderby'     => 'menu_order',
-		'order'       => 'ASC',
-		'post_type'   => 'page',
-		'category'    => get_category_by_slug($c)->term_id,
-	));
-}
-
-
-/**
- * Returns published images as html string
- *
- * @return void
- * @author Jared Lang
- **/
-function get_home_images($limit=null, $orderby=null){
-	$limit       = ($limit) ? $limit : -1;
-	$orderby     = ($orderby) ? $orderby : 'date';
-	$home_images = new ProvostHomeImages();
-	$images      = get_posts(array(
-		'numberposts' => -1,
-		'orderby'     => $orderby,
-		'order'       => 'ASC',
-		'post_type'   => $home_images->options('name'),
-	));
-	if ($images){
-		$html = '';
-		foreach($images as $image){
-			$html .= get_the_post_thumbnail($image->ID);
-		}
-		return $html;
-	}else{
-		return '';
+function cleanup($content, $indent){
+	$prefix = '';
+	for ($i = 0; $i < $indent; $i++){
+		$prefix .= "\t";
 	}
+	$lines = explode("\n", $content);
+	$lines = array_filter($lines, create_function('$l', 'return (bool)trim($l);'));
+	$lines = array_map(create_function('$l,$prefix="'.$prefix.'"', '
+		return $prefix.trim($l);
+	'), $lines);
+	$lines = implode("\n", $lines);
+	print "\n".$lines."\n";
 }
 
-
-/**
- * Tells you if this person has just commented within a given time frame and set
- * of comments.
- *
- * @return void
- * @author Jared Lang
- */
-function user_just_commented($comments, $timeframe){
-	/*/ This attempts to detect whether or not the user just commented by
-	inspecting the last 10 comments passed and comparing their IP address and
-	the current time to the comments IP address and post date.
-	
-	Unfortunately, if someone revists the the page this function is called on
-	within the defined timeframe, it will return that they have just commented.
-	/*/
-	
-	$limit    = 10; # Limit number of comments to search in
-	$comments = array_slice($comments, -$limit);
-	
-	foreach($comments as $comment){
-		$diff = time() - strtotime($comment->comment_date_gmt);
-		if ($diff < $timeframe){
-			if ($_SERVER["REMOTE_ADDR"] == $comment->comment_author_IP){
-				return True;
-			}
-		}
-	}
-	return False;
-}
-
-function disallow_direct_load($page){
-	if ( $page == basename($_SERVER['SCRIPT_FILENAME'])){
-		die ( 'Please do not load this page directly. Thanks!' );
-	}
-}
 ?>
