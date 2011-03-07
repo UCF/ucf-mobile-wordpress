@@ -13,8 +13,20 @@ function app_link($attrs, $content){
 	if (!$link)   {return 'No application found for label '.$app;}
 	if (!$content){$content = $app;}
 	
+	$image = get_the_post_thumbnail($link->ID);
+	if (preg_match('/src="([^"]+)"/', $image, $match)){
+		$background = $match[1];
+	}else{
+		$background = null;
+	}
+	
 	ob_start();?>
-	<a href="<?=get_post_meta($link->ID, 'mobile_native_app_url', True)?>" onclick="_gaq.push(['_trackEvent','Mobile_main_menu','Button_click','Download <?=$app?>'])"><?=$content?></a>
+	<a
+		<?=($background) ? "style=\"background-image: url($background)\"": ''?>
+		href="<?=get_post_meta($link->ID, 'mobile_native_app_url', True)?>"
+		onclick="_gaq.push(['_trackEvent','Mobile_main_menu','Button_click','Download <?=$app?>'])">
+			<?=$content?>
+	</a>
 	<?php return ob_get_clean();
 }
 add_shortcode('app-link', 'app_link');
