@@ -8,7 +8,7 @@ Tags: Thematic
 */
 
 /*/ Page-wide /*/
-body{background-color: #000; color: #fff; font-family: "Georgia", "serif"; font-size: 15px;}
+body{background-color: #000; color: #fff; font-family: "Georgia", "serif"; font-size: 15px; line-height: 1.5em;}
 
 
 /*/ Heading /*/
@@ -35,7 +35,7 @@ body{background-color: #000; color: #fff; font-family: "Georgia", "serif"; font-
 
 /*/ Footer /*/
 #footer{border-top: 1px solid #161616; margin-top: 50px; padding: 20px 0 20px 0;}
-#footer .logo a{display: block; height: 89px; width: 155px; text-indent: -1024px; background: transparent url(/media/img/info/ucf-sfo.png) no-repeat; position: relative; top: -10px;}
+#footer .logo a{display: block; height: 89px; width: 155px; text-indent: -1024px; background: transparent url(./static/img/ucf-sfo.png) no-repeat; position: relative; top: -10px;}
 #footer .copyright{text-align: right; font-family: "Helvetica", "arial", "sans-serif"; font-size: 14px; color: #999;}
 
 
