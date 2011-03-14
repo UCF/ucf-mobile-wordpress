@@ -33,14 +33,25 @@ add_shortcode('app-link', 'app_link');
 
 
 /**
- * Outputs a list of the provost updates
+ * Outputs the mobile menu.
  *
  * @return string
  * @author Jared Lang
  **/
-function app_list(){
+function app_list($attrs){
 	$cache_key     = 'mobile_modules';
-	$mobile_domain = "http://mobile.ucf.edu";
+	switch(@$attrs['mode']){
+		default:
+		case 'prod':
+			$mobile_domain = "http://mobile.ucf.edu";
+			break;
+		case 'qa':
+			$mobile_domain = "http://mobile.qa.smca.ucf.edu";
+			break;
+		case 'dev':
+			$mobile_domain = "http://mobile.dev.smca.ucf.edu";
+			break;
+	}
 	$mobile_home   = $mobile_domain."/home";
 	$user_agent    = $_SERVER['HTTP_USER_AGENT'];
 	
