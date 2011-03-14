@@ -49,7 +49,7 @@ function app_list($attrs){
 			$mobile_domain = "http://mobile.qa.smca.ucf.edu";
 			break;
 		case 'dev':
-			$mobile_domain = "http://mobile.dev.smca.ucf.edu";
+			$mobile_domain = "http://webcom.dev.smca.ucf.edu/harvard-mobile/home";
 			break;
 	}
 	$mobile_home   = $mobile_domain."/home";
