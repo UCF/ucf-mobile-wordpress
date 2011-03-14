@@ -71,7 +71,7 @@ function app_list($attrs){
 	));
 	
 	$html = get_transient($cache_key);
-	if (True){#}$html === False){
+	if ($html === False){
 		# Get home page html
 		$html = file_get_contents($mobile_home, False, $context);
 	
