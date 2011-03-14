@@ -44,16 +44,23 @@ function app_list($attrs){
 		default:
 		case 'prod':
 			$mobile_domain = "http://mobile.ucf.edu";
+			$mobile_path   = "/";
 			break;
 		case 'qa':
 			$mobile_domain = "http://mobile.qa.smca.ucf.edu";
+			$mobile_path   = "/";
 			break;
 		case 'dev':
-			$mobile_domain = "http://webcom.dev.smca.ucf.edu/harvard-mobile";
+			$mobile_domain = "http://mobile.dev.smca.ucf.edu";
+			$mobile_path   = "/";
+			break;
+		case 'webcom':
+			$mobile_domain = "http://webcom.dev.smca.ucf.edu";
+			$mobile_path   = "/harvard-mobile";
 			break;
 	}
-	$mobile_home   = $mobile_domain."/home";
-	$user_agent    = $_SERVER['HTTP_USER_AGENT'];
+	$mobile_home = $mobile_domain.$mobile_path."/home";
+	$user_agent  = $_SERVER['HTTP_USER_AGENT'];
 	
 	$context = stream_context_create(array(
 		'http' => array(
@@ -64,7 +71,7 @@ function app_list($attrs){
 	));
 	
 	$html = get_transient($cache_key);
-	if ($html === False){
+	if (True){#}$html === False){
 		# Get home page html
 		$html = file_get_contents($mobile_home, False, $context);
 	
@@ -76,8 +83,8 @@ function app_list($attrs){
 	
 		# Replace relative links with absolute
 		$html = str_replace(
-			array('href="/', 'src="/'),
-			array('href="'.$mobile_domain.'/', 'src="'.$mobile_domain.'/'),
+			array('href="'.$mobile_path, 'src="'.$mobile_path),
+			array('href="'.$mobile_domain.$mobile_path, 'src="'.$mobile_domain.$mobile_path),
 			$html
 		);
 		set_transient($cache_key, $html, 86400);
