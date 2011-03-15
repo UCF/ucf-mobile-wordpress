@@ -39,7 +39,6 @@ add_shortcode('app-link', 'app_link');
  * @author Jared Lang
  **/
 function app_list($attrs){
-	$cache_key     = 'mobile_modules';
 	switch(@$attrs['mode']){
 		default:
 		case 'prod':
@@ -61,6 +60,7 @@ function app_list($attrs){
 	}
 	$mobile_home = $mobile_domain.$mobile_path."/home";
 	$user_agent  = $_SERVER['HTTP_USER_AGENT'];
+	$cache_key   = md5($mobile_home);
 	
 	$context = stream_context_create(array(
 		'http' => array(
