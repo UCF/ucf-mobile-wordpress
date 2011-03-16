@@ -59,7 +59,6 @@ function app_list($attrs){
 			break;
 	}
 	$mobile_home = $mobile_domain.$mobile_path."/home";
-	print $mobile_home;
 	$user_agent  = $_SERVER['HTTP_USER_AGENT'];
 	$cache_key   = md5($mobile_home);
 	
