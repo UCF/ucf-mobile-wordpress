@@ -43,15 +43,15 @@ function app_list($attrs){
 		default:
 		case 'prod':
 			$mobile_domain = "http://mobile.ucf.edu";
-			$mobile_path   = "/";
+			$mobile_path   = "";
 			break;
 		case 'qa':
 			$mobile_domain = "http://mobile.qa.smca.ucf.edu";
-			$mobile_path   = "/";
+			$mobile_path   = "";
 			break;
 		case 'dev':
 			$mobile_domain = "http://mobile.dev.smca.ucf.edu";
-			$mobile_path   = "/";
+			$mobile_path   = "";
 			break;
 		case 'webcom':
 			$mobile_domain = "http://webcom.dev.smca.ucf.edu";
@@ -59,6 +59,7 @@ function app_list($attrs){
 			break;
 	}
 	$mobile_home = $mobile_domain.$mobile_path."/home";
+	print $mobile_home;
 	$user_agent  = $_SERVER['HTTP_USER_AGENT'];
 	$cache_key   = md5($mobile_home);
 	
