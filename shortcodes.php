@@ -74,7 +74,11 @@ function app_list($attrs){
 	if ($html === False){
 		# Get home page html
 		$html = file_get_contents($mobile_home, False, $context);
-	
+		
+		if (!$html){
+			$html = "<p>Failed to load menu.</p>";
+		}
+		
 		# Find home module html code
 		$find = '/<div id="Home">[\s]+<ul>.*<\/ul>[\s]+<\/div>/s';
 		if (preg_match($find, $html, $match)){
