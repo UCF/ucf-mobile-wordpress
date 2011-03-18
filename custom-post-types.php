@@ -146,6 +146,7 @@ class AppImage extends CustomPostType{
 		$new_item       = 'New App Image',
 		$public         = True,
 		$use_thumbnails = True,
+		$use_order      = True,
 		$use_title      = True,
 		$use_metabox    = True;
 	
