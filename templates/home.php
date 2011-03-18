@@ -9,6 +9,8 @@
 		<?php
 		$images   = get_posts(array(
 			'post_type'   => get_custom_post_type('AppImage'),
+			'order'       => 'ASC',
+			'orderby'     => 'menu_order',
 			'numberposts' => -1,
 		));
 		$rows = array();
