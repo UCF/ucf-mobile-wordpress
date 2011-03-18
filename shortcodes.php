@@ -87,7 +87,9 @@ function app_list($attrs){
 			array('href="'.$mobile_domain.$mobile_path, 'src="'.$mobile_domain.$mobile_path),
 			$html
 		);
-		set_transient($cache_key, $html, 86400);
+		if ($html){
+			set_transient($cache_key, $html, 86400);
+		}
 	}
 	
 	ob_start();?>
