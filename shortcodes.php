@@ -73,16 +73,20 @@ function app_list($attrs){
 	$html = get_transient($cache_key);
 	if ($html === False){
 		# Get home page html
-		$html = file_get_contents($mobile_home, False, $context);
+		$failed = False;
+		$html   = file_get_contents($mobile_home, False, $context);
 		
 		if (!$html){
-			$html = "<p>Failed to load menu.</p>";
+			$failed = True;
+			$html   = "<p>Failed to load menu.</p>";
 		}
 		
 		# Find home module html code
 		$find = '/<div id="Home">[\s]+<ul>.*<\/ul>[\s]+<\/div>/s';
 		if (preg_match($find, $html, $match)){
 			$html = $match[0];
+		}else{
+			$failed = True;
 		}
 	
 		# Replace relative links with absolute
@@ -91,7 +95,7 @@ function app_list($attrs){
 			array('href="'.$mobile_domain.$mobile_path, 'src="'.$mobile_domain.$mobile_path),
 			$html
 		);
-		if ($html){
+		if (!$failed){
 			set_transient($cache_key, $html, 86400);
 		}
 	}
