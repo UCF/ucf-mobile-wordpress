@@ -66,7 +66,7 @@ function app_list($attrs){
 		'http' => array(
 			'method'     => 'GET',
 			'user_agent' => $user_agent,
-			'timeout'    => 3,
+			'timeout'    => 10,
 		),
 	));
 	
