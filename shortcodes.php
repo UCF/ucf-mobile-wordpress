@@ -59,7 +59,7 @@ function app_list($attrs){
 			break;
 	}
 	$mobile_home = $mobile_domain.$mobile_path."/home";
-	$user_agent  = $_SERVER['HTTP_USER_AGENT'];
+	$user_agent  = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_6; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16";
 	$cache_key   = md5($mobile_home);
 	
 	$context = stream_context_create(array(
