@@ -90,7 +90,6 @@ function app_list($attrs){
 		}
 	
 		# Replace relative links with absolute
-		var_dump($mobile_path, $mobile_domain);
 		$html = str_replace(
 			array('href="'.$mobile_path, 'src="'.$mobile_path),
 			array('href="'.$mobile_domain.$mobile_path, 'src="'.$mobile_domain.$mobile_path),
