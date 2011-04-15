@@ -43,15 +43,15 @@ function app_list($attrs){
 		default:
 		case 'prod':
 			$mobile_domain = "http://mobile.ucf.edu";
-			$mobile_path   = "";
+			$mobile_path   = "/";
 			break;
 		case 'qa':
 			$mobile_domain = "http://mobile.qa.smca.ucf.edu";
-			$mobile_path   = "";
+			$mobile_path   = "/";
 			break;
 		case 'dev':
 			$mobile_domain = "http://mobile.dev.smca.ucf.edu";
-			$mobile_path   = "";
+			$mobile_path   = "/";
 			break;
 		case 'webcom':
 			$mobile_domain = "http://webcom.dev.smca.ucf.edu";
@@ -71,7 +71,7 @@ function app_list($attrs){
 	));
 	
 	$html = get_transient($cache_key);
-	if ($html === False){
+	if (True){#}$html === False){
 		# Get home page html
 		$failed = False;
 		$html   = file_get_contents($mobile_home, False, $context);
@@ -90,11 +90,13 @@ function app_list($attrs){
 		}
 	
 		# Replace relative links with absolute
+		var_dump($mobile_path, $mobile_domain);
 		$html = str_replace(
 			array('href="'.$mobile_path, 'src="'.$mobile_path),
 			array('href="'.$mobile_domain.$mobile_path, 'src="'.$mobile_domain.$mobile_path),
 			$html
 		);
+		
 		if (!$failed){
 			set_transient($cache_key, $html, 86400);
 		}
