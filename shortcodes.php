@@ -71,7 +71,7 @@ function app_list($attrs){
 	));
 	
 	$html = get_transient($cache_key);
-	if (True){#}$html === False){
+	if ($html === False){
 		# Get home page html
 		$failed = False;
 		$html   = file_get_contents($mobile_home, False, $context);
@@ -82,7 +82,7 @@ function app_list($attrs){
 		}
 		
 		# Find home module html code
-		$find = '/<div id="Home">[\s]+<ul>.*<\/ul>[\s]+<\/div>/s';
+		$find = '/<div id="Home">[\s]+<ul>.*<\/ul>[\s]+<\/div>/sU';
 		if (preg_match($find, $html, $match)){
 			$html = $match[0];
 		}else{
