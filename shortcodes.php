@@ -70,6 +70,10 @@ function app_list($attrs){
 		),
 	));
 	
+	if(isset($_GET['clear'])){
+		delete_transient($cache_key);
+	}
+	
 	$html = get_transient($cache_key);
 	if ($html === False){
 		# Get home page html
