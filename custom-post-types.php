@@ -15,7 +15,7 @@ Custom post types
 ----------------------------------/*/
 abstract class CustomPostType{
 	public 
-		$name           = 'mobile_custom_post_type',
+		$name           = 'mobile_custom_post_type', # Must be 20 characters or less
 		$plural_name    = 'Custom Posts',
 		$singular_name  = 'Custom Post',
 		$add_new_item   = 'Add New Custom Post',
@@ -162,12 +162,55 @@ class AppImage extends CustomPostType{
 	}
 }
 
+class FeaturedModule extends CustomPostType{
+	public
+		$name			= 'mobile_feat_module',
+		$plural_name 	= 'Featured Modules',
+		$singular_name	= 'Featured Module',
+		$add_new_item	= 'Add Featured Module',
+		$edit_item		= 'Edit Featured Module',
+		$new_item		= 'New Featured Module',
+		$public         = True,
+		$use_thumbnails = True,
+		$use_order      = True,
+		$use_title      = True,
+		$use_metabox    = True;
+
+	public function fields(){
+		return array(
+			array(
+				'name' 	=> __('Link URL'),
+				'desc'	=> __('Feature Link URL'),
+				'id'	=> $this->options('name').'_url',
+				'type'	=> 'text'				
+			),
+			array(
+				'name' 	=> __('Heading'),
+				'desc' 	=> __('Feature Heading Text'),
+				'id'	=> $this->options('name').'_heading',
+				'type'	=> 'text'	
+			),
+			array(
+				'name' 	=> __('Description'),
+				'desc' 	=> __('Feature Description Text'),
+				'id'	=> $this->options('name').'_desc',
+				'type'	=> 'text'	
+			),
+			array(
+				'name' 	=> __('End'),
+				'desc' 	=> __('Feature End Text'),
+				'id'	=> $this->options('name').'_end',
+				'type'	=> 'text'	
+			),
+		);		
+	}
+}
 
 /*/-------------------------------------
 Register custom post types and functions for display
 -------------------------------------/*/
 function installed_custom_post_types(){
-	$installed = array('NativeApp', 'AppImage');
+	$installed = array('NativeApp', 'AppImage', 'FeaturedModule');
 	
 	return array_map(create_function('$class', '
 		return new $class;
@@ -306,7 +349,7 @@ function _show_meta_boxes($post, $meta_box){
 			'<td>';
 		switch ($field['type']) {
 			case 'text':
-				echo '<input type="text" name="', $field['id'], '" id="', $field['id'], '" value="', $meta ? $meta : $field['std'], '" size="30" style="width:97%" />', "\n", $field['desc'];
+				echo '<input type="text" name="', $field['id'], '" id="', $field['id'], '" value="', htmlentities($meta ? $meta : $field['std']), '" size="30" style="width:97%" />', "\n", $field['desc'];
 				break;
 			case 'textarea':
 				echo '<textarea name="', $field['id'], '" id="', $field['id'], '" cols="60" rows="4" style="width:97%">', $meta ? $meta : $field['std'], '</textarea>', "\n", $field['desc'];
