@@ -218,49 +218,11 @@ class FeaturedModule extends CustomPostType{
 	}
 }
 
-class DownloadableApp extends CustomPostType{
-	public
-		$name			= 'mobile_download_app',
-		$plural_name 	= 'Downloadable Apps',
-		$singular_name	= 'Downloadable App',
-		$add_new_item	= 'Add Downloadable App',
-		$edit_item		= 'Edit Downloadable App',
-		$new_item		= 'New Downloadable App',
-		$public         = True,
-		$use_thumbnails = True,
-		$use_order      = True,
-		$use_title      = True,
-		$use_metabox    = True;
-
-	public function fields(){
-		return array(
-			array(
-				'name' 	=> __('URL'),
-				'desc'	=> __('Link URL'),
-				'id'	=> $this->options('name').'_link_url',
-				'type'	=> 'text'				
-			),
-			array(
-				'name' 	=> __('Text'),
-				'desc' 	=> __('Link Text'),
-				'id'	=> $this->options('name').'_link_text',
-				'type'	=> 'text'	
-			),
-			array(
-				'name' 	=> __('Description'),
-				'desc' 	=> __('Description Text'),
-				'id'	=> $this->options('name').'_desc',
-				'type'	=> 'text'	
-			),
-		);		
-	}	
-}
-
 /*/-------------------------------------
 Register custom post types and functions for display
 -------------------------------------/*/
 function installed_custom_post_types(){
-	$installed = array('NativeApp', 'AppImage', 'FeaturedModule', 'DownloadableApp');
+	$installed = array('NativeApp', 'AppImage', 'FeaturedModule');
 	
 	return array_map(create_function('$class', '
 		return new $class;
