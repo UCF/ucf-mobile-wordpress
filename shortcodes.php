@@ -4,6 +4,7 @@
  * Outputs a link for application links (store links), encapsulates tracking
  * code required for the links.
  **/
+/*
 function app_link($attrs, $content){
 	$app = @$attrs['app'];
 	
@@ -30,6 +31,40 @@ function app_link($attrs, $content){
 	<?php return ob_get_clean();
 }
 add_shortcode('app-link', 'app_link');
+*/
+
+function app_links($attrs) {
+	$native_apps = get_posts(array(
+		'post_type'		=> get_custom_post_type('NativeApp'),
+		'order'			=> 'ASC',
+		'orderby'		=> 'menu_order',
+		'numberporsts'	=> -1
+	));
+	
+	ob_start(); ?>
+	<div id="apps">
+		<h3>Native Apps Now Available For:</h3>
+		<ul>
+		<? foreach($native_apps as $native_app) {
+			$image 	= wp_get_attachment_image_src(get_post_thumbnail_id($native_app->ID));
+			$url 	= get_post_meta($native_app->ID, 'mobile_native_app_url', True);
+			$name 	= get_post_meta($native_app->ID, 'mobile_native_app_name', True);
+			?>
+			<li class="app-<?=strtolower(get_post_meta($native_app->ID, 'mobile_native_app_name', True))?>">
+				<? if(strlen($url) > 0) {?>
+				<a 	<?= ($image) ? "style=\"background-image: url($image[0]);\"": '' ?>
+					href="<?=$url?>"
+					onclick="_gaq.push(['_trackEvent','Mobile_main_menu','Button_click','Download <?=$name?>">
+					<?=$name?> <?=get_post_meta($native_app->ID, 'mobile_native_app_url_text', True)?> 
+				</a>
+				<? } else  { echo $name;} ?>
+		<? } ?>
+		</ul>
+	</div>
+	<?php
+	return ob_get_clean();
+}
+add_shortcode('app-links', 'app_links');
 
 /**
  * Outputs website feature list

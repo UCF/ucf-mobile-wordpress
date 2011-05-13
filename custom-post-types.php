@@ -127,11 +127,23 @@ class NativeApp extends CustomPostType{
 	public function fields(){
 		return array(
 			array(
-				'name' => __('URL'),
-				'desc' => __('Application URL'),
+				'name' 	=> __('Name'),
+				'desc' 	=> __('Application Name - Used for Google Analytics hook. Concatenated with the `Link Text` field to form the final link string.'),
+				'id'	=> $this->options('name').'_name',
+				'type'	=> 'text'
+			),
+			array(
+				'name' => __('Link URL'),
+				'desc' => __('Application URL - If left blank, only the `Name` field will be rendered in the LI (no anchor tag).'),
 				'id'   => $this->options('name').'_url',
 				'type' => 'text',
 			),
+			array(
+				'name' 	=> __('Link Text'),
+				'desc' 	=> __('Application Link Text'),
+				'id'	=> $this->options('name').'_url_text',
+				'type'	=> 'text'
+			)
 		);
 	}
 }
@@ -179,26 +191,26 @@ class FeaturedModule extends CustomPostType{
 	public function fields(){
 		return array(
 			array(
-				'name' 	=> __('Link URL'),
-				'desc'	=> __('Feature Link URL'),
+				'name' 	=> __('URL'),
+				'desc'	=> __('Link URL'),
 				'id'	=> $this->options('name').'_url',
 				'type'	=> 'text'				
 			),
 			array(
 				'name' 	=> __('Heading'),
-				'desc' 	=> __('Feature Heading Text'),
+				'desc' 	=> __('Heading Text'),
 				'id'	=> $this->options('name').'_heading',
 				'type'	=> 'text'	
 			),
 			array(
 				'name' 	=> __('Description'),
-				'desc' 	=> __('Feature Description Text'),
+				'desc' 	=> __('Description Text'),
 				'id'	=> $this->options('name').'_desc',
 				'type'	=> 'text'	
 			),
 			array(
 				'name' 	=> __('End'),
-				'desc' 	=> __('Feature End Text'),
+				'desc' 	=> __('End Text'),
 				'id'	=> $this->options('name').'_end',
 				'type'	=> 'text'	
 			),
@@ -206,11 +218,49 @@ class FeaturedModule extends CustomPostType{
 	}
 }
 
+class DownloadableApp extends CustomPostType{
+	public
+		$name			= 'mobile_download_app',
+		$plural_name 	= 'Downloadable Apps',
+		$singular_name	= 'Downloadable App',
+		$add_new_item	= 'Add Downloadable App',
+		$edit_item		= 'Edit Downloadable App',
+		$new_item		= 'New Downloadable App',
+		$public         = True,
+		$use_thumbnails = True,
+		$use_order      = True,
+		$use_title      = True,
+		$use_metabox    = True;
+
+	public function fields(){
+		return array(
+			array(
+				'name' 	=> __('URL'),
+				'desc'	=> __('Link URL'),
+				'id'	=> $this->options('name').'_link_url',
+				'type'	=> 'text'				
+			),
+			array(
+				'name' 	=> __('Text'),
+				'desc' 	=> __('Link Text'),
+				'id'	=> $this->options('name').'_link_text',
+				'type'	=> 'text'	
+			),
+			array(
+				'name' 	=> __('Description'),
+				'desc' 	=> __('Description Text'),
+				'id'	=> $this->options('name').'_desc',
+				'type'	=> 'text'	
+			),
+		);		
+	}	
+}
+
 /*/-------------------------------------
 Register custom post types and functions for display
 -------------------------------------/*/
 function installed_custom_post_types(){
-	$installed = array('NativeApp', 'AppImage', 'FeaturedModule');
+	$installed = array('NativeApp', 'AppImage', 'FeaturedModule', 'DownloadableApp');
 	
 	return array_map(create_function('$class', '
 		return new $class;
