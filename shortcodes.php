@@ -84,6 +84,7 @@ function app_list($attrs) {
 	ob_start();?>
 
 	<h2>Website Features:</h2>
+	<div id="Home">
 	<ul>
 	<? foreach($features as $feature) {?>
 		<li>
@@ -97,6 +98,7 @@ function app_list($attrs) {
 	
 	<?} ?>
 	</ul>
+	</div>
 	<?php
 	return ob_get_clean();
 }
