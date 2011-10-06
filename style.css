@@ -42,7 +42,7 @@ body{background-color: #000; color: #fff; font-family: "Georgia", "serif"; font-
 /*/ Menu /*/
 ul{border: none; margin: 0; padding: 0; font-weight: 300; list-style-type: none;}
 ul li{border: none; margin: 0; padding: 0;}
-ul li a{background-image: url('/media/img/chevron.png'); background-repeat: no-repeat; background-position: 100% 27px; border-bottom: 1px solid #161616; margin: 0; padding: 15px 20px; display: block; text-decoration: none; color: #fff;}
+ul li a{background-repeat: no-repeat; background-position: 100% 27px; border-bottom: 1px solid #161616; margin: 0; padding: 15px 20px; display: block; text-decoration: none; color: #fff;}
 ul li.last a { border-bottom:0; }
 ul li a:hover,
 ul li a:focus{color: #fff; background-color: #222; cursor: pointer;}
