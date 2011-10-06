@@ -54,7 +54,7 @@ function app_links($attrs) {
 				<? if(strlen($url) > 0) {?>
 				<a 	<?= ($image) ? "style=\"background-image: url($image[0]);\"": '' ?>
 					href="<?=$url?>"
-					onclick="_gaq.push(['_trackEvent','Mobile_main_menu','Button_click','Download <?=$name?>">
+					onclick="_gaq.push(['_trackEvent','Mobile_main_menu','Button_click','Download <?=$name?>'])">
 					<?=$name?> <?=get_post_meta($native_app->ID, 'mobile_native_app_url_text', True)?> 
 				</a>
 				<? } else  { echo $name;} ?>
