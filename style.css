@@ -2,79 +2,77 @@
 Theme Name: UCF Mobile
 Author: UCF Web Communications
 Github Theme URI: https://github.com/UCF/ucf-mobile-wordpress
-Template: thematic
 Version: v1.1.2
-Tags: Thematic
 */
 
-/*/ Page-wide /*/
-body{background-color: #000; color: #fff; font-family: "Georgia", "serif"; font-size: 15px; line-height: 1.5em;}
+/* UCF Header Styles */
+#UCFHBSearch_ucf fieldset #q {
+	line-height: 11px;
+	color: #000000;
+	padding: 2px!important;
+	font-size: 11px;
+	font-family: 'Lucida Grande',sans-serif;
+	height: 13px;
+	border-radius: 0;
+	webkit-border-radius: 0;
+	moz-border-radius: 0;
+	margin-bottom: 0;
+	margin-top: 1px;
+}
+select#UCFHBHeaderLinks {
+	height: 18px;
+	font-size: 11px;
+	color: #000000;
+	font-family: 'Lucida Grande', sans-serif;
+	border-radius: 0;
+	webkit-border-radius: 0;
+	moz-border-radius: 0;
+	margin-bottom: 0;
+	margin-top: 1px;
+	padding: 0;
+}
+#UCFHBHeader * {height:auto;}
 
 
-/*/ Heading /*/
-#header{margin-top: 40px; font-family: "Helvetica Neue", "Helvetica", "sans-serif";}
-#header h1{font-style: normal;}
+/* Page-wide */
+body{background-color: #000;}
+
+
+/* Header */
+#header, #header-alt{padding-top: 40px; padding-bottom:40px;}
+#header h1{}
+#header-alt {text-align:right;}
+#header-alt h2 {font-weight:100; font-size:36px; line-height:44px;}
+#header-alt h2 a {color:#ffc907;}
 #header .brand{color: #fff; font-size: 52px;  font-weight: 300;}
 #header .brand .standout{font-weight: bold; color: #ffc907;}
 #header .url a{display: block; font-size: 36px; color: #ffc907; font-weight: 100; text-align: right; text-decoration: none;}
-.ie #header { padding-bottom:20px; }
 
 
 /*/ Content /*/
-#content{}
-#content #left{}
-#content #left #call-to-act{ display: block; color: #000; font-size: 19px; font-family: "Helvetica", "sans-serif"; padding: 10px; width: 265px; background-color: #ffc907; margin-bottom: 30px; text-align: center; font-weight: bold; text-decoration: none;}
-#content #left p{font-weight: 100;}
-#content #left p a{color: #ffc907; text-decoration: underline;}
-#content #left h2{font-size: 15px; color: #fff; font-weight: 600; letter-spacing: 1px; font-family: "Helvetica", "sans-serif"; text-align: left;}
-#content #right img{margin: 0 0 0 19px;}
-#content #right .caption{font-size: 15px; font-family: "Helvetica", "sans-serif"; font-weight: 600; text-align: center;}
-#content #right .row{margin-bottom: 40px;}
-#content #right .col{}
+#home #call-to-act{ font-weight:bold; width: 90%; margin-top: 30px; margin-bottom: 40px; }
+#home h2 {letter-spacing: 1px;}
+
+.row .mobile-app-image:first-child {margin-left: 30px;}
+.row .mobile-app-image {text-align:center; float:right; margin-bottom: 20px; width: 251px;}
+
+p.caption {font-family: "Helvetica Neue", Helvetica, sans-serif; font-weight: bold;}
 
 
-/*/ Footer /*/
-#footer{border-top: 1px solid #161616; margin-top: 50px; padding: 20px 0 20px 0;}
-#footer .logo a{display: block; height: 89px; width: 155px; text-indent: -1024px; background: transparent url(./static/img/ucf-sfo.png) no-repeat; position: relative; top: -10px;}
-#footer .copyright{text-align: right; font-family: "Helvetica", "arial", "sans-serif"; font-size: 14px; color: #999;}
-
-
-/*/ Menu /*/
-ul{border: none; margin: 0; padding: 0; font-weight: 300; list-style-type: none;}
-ul li{border: none; margin: 0; padding: 0;}
-ul li a{background-repeat: no-repeat; background-position: 100% 27px; border-bottom: 1px solid #161616; margin: 0; padding: 15px 20px; display: block; text-decoration: none; color: #fff;}
-ul li.last a { border-bottom:0; }
-ul li a:hover,
-ul li a:focus{color: #fff; background-color: #222; cursor: pointer;}
-ul li a .icon{display: block; float: left; width: 55px; position: relative; top: -3px;}
-.ie7 ul li a .heading{margin-top: -22px;}
-ul li a .heading,
-ul li a .description{display: block; margin-left: 70px;}
-ul li a .heading{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif"; font-size: 22px;}
-ul li a .description{font-family: "Georgia", "serif"; font-size: 13px; font-weight: normal; color: #eeeeee;}
-
-.gold{color: #FCC82D;}
-.bold{font-weight: bold;}
-
-/*********************************************\
-    Ridiculous CSS3 button 
-\*********************************************/
-.button {
-	zoom: 1;
-	display:inline-block; color:white; background: #1d89e2;
-	-moz-border-radius: 8px; -webkit-border-radius: 8px; border-radius:8px;
-	background: -webkit-gradient(linear, left top, left bottom, from(#FFCC0F), to(#D59200));
-	background: -moz-linear-gradient(top,  #FFCC0F,  #D59200); cursor:pointer;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFCC0F', endColorstr='#D59200', gradientType='0');}
-	
+/* Apps list */
 #apps {
 	background: #292A30;
 	background: -webkit-gradient(linear, left top, left bottom, from(#292A30), to(#000));
 	background: -moz-linear-gradient(top,  #292A30,  #000);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#292A30', endColorstr='#000000', gradientType='0');
-	padding:20px; -moz-border-radius: 8px; -webkit-border-radius: 8px;
-	width:245px; border-radius:8px; margin-bottom:15px; }
-#apps h3 { font-size:16px; color:white; margin-bottom:5px; }
+	padding:10px 20px; 
+	border-radius:8px;
+	-moz-border-radius: 8px; 
+	-webkit-border-radius: 8px;
+	margin-top: 20px;
+	margin-bottom:20px; 
+}
+#apps h3 { font-size:16px; color:white; margin-bottom:5px; font-weight:normal; }
 #apps ul { margin:0; padding:0 10px; list-style:none; color:white; font-family:helvetica, sans-serif; }
 #apps ul li { background:none; margin:0; padding:0: color:white; line-height:1.8; }
 #apps ul li a { display:inline; background:none; margin:0; padding:0; border:0; }
@@ -84,3 +82,44 @@ ul li a .description{font-family: "Georgia", "serif"; font-size: 13px; font-weig
 #apps .app-iphone  a { display:block; background:url('null'); height:50px; width:145px; overflow:hidden; text-indent:-500px; margin:15px 0 10px; }
 #apps .app-android a { display:block; background:url('null'); height:50px; width:145px; overflow:hidden; text-indent:-500px; margin:15px 0 10px; }
 #apps .app-bb      a { display:block; background:url('null'); height:50px; width:145px; overflow:hidden; text-indent:-500px; margin:15px 0 10px; }
+
+
+/* Featured Content Menu */
+#home-features ul{border: none; margin: 0; padding: 0; font-weight: 300; list-style-type: none;}
+#home-features ul li{border: none; margin: 0; padding: 0;}
+#home-features ul li a{
+	background-repeat: no-repeat; 
+	background-position: 100% 27px; 
+	border-bottom: 1px solid #161616; 
+	margin: 0; 
+	padding: 15px 20px; 
+	display: block; 
+	text-decoration: none; 
+	color: #fff;
+}
+#home-features ul li.last a { border-bottom:0; }
+#home-features ul li a:hover,
+#home-features ul li a:focus{color: #fff; background-color: #222; cursor: pointer;}
+#home-features ul li a .icon{display: block; float: left; width: 55px; position: relative; /*top: -3px;*/}
+.ie7 #home-features ul li a .heading{margin-top: -22px;}
+#home-features ul li a .heading,
+#home-features ul li a .description{display: block; margin-left: 70px;}
+#home-features ul li a .heading{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif"; font-size: 22px; line-height: 28px;}
+#home-features ul li a .description{
+	font-family: "Georgia", "serif"; 
+	font-size: 13px; 
+	line-height: 16px;
+	font-weight: normal; 
+	color: #eeeeee;
+}
+
+.gold{color: #FCC82D;}
+.bold{font-weight: bold;}
+.light{font-weight:200;}
+
+
+/* Footer */
+#footer{border-top: 1px solid #161616; margin-top: 50px; padding: 20px 0 20px 0; font-family: "Helvetica Neue", Helvetica, sans-serif;}
+.footer-widget-2 {*margin-left:0;} /* IE7.... */
+.maintained, .copyright {text-align: right; color: #999;}
+.maintained {margin-bottom: 10px; margin-top: 10px;}

@@ -1,61 +1,121 @@
 <?php
-/*/ The base abstract CustomPostType covers a really simple post type,
-one that does not require additional fields and metaboxes.  This means that
-any object that inherits from this base class can safely ignore most of the
-methods defined in it, and if it needs those additional methods it should
-simply override and define it's own.
 
-To install a new custom post type, add the class name to the array contained in 
-installed_custom_post_types;
-/*/
-
-
-/*/----------------------------------
-Custom post types
-----------------------------------/*/
+/**
+ * Abstract class for defining custom post types.  
+ * 
+ **/
 abstract class CustomPostType{
 	public 
-		$name           = 'mobile_custom_post_type', # Must be 20 characters or less
+		$name           = 'custom_post_type',
 		$plural_name    = 'Custom Posts',
 		$singular_name  = 'Custom Post',
 		$add_new_item   = 'Add New Custom Post',
 		$edit_item      = 'Edit Custom Post',
 		$new_item       = 'New Custom Post',
-		$public         = True,
-		$use_categories = False,
-		$use_thumbnails = False,
-		$use_editor     = False,
-		$use_order      = False,
-		$use_title      = False,
-		$use_metabox    = False;
+		$public         = True,  # I dunno...leave it true
+		$use_title      = True,  # Title field
+		$use_editor     = True,  # WYSIWYG editor, post content field
+		$use_revisions  = True,  # Revisions on post content and titles
+		$use_thumbnails = False, # Featured images
+		$use_order      = False, # Wordpress built-in order meta data
+		$use_metabox    = False, # Enable if you have custom fields to display in admin
+		$use_shortcode  = False, # Auto generate a shortcode for the post type
+		                         # (see also objectsToHTML and toHTML methods)
+		$taxonomies     = array('post_tag'),
+		$built_in       = False,
+
+		# Optional default ordering for generic shortcode if not specified by user.
+		$default_orderby = null,
+		$default_order   = null;
 	
+	
+	/**
+	 * Wrapper for get_posts function, that predefines post_type for this
+	 * custom post type.  Any options valid in get_posts can be passed as an
+	 * option array.  Returns an array of objects.
+	 **/
+	public function get_objects($options=array()){
+
+		$defaults = array(
+			'numberposts'   => -1,
+			'orderby'       => 'title',
+			'order'         => 'ASC',
+			'post_type'     => $this->options('name'),
+		);
+		$options = array_merge($defaults, $options);
+		$objects = get_posts($options);
+		return $objects;
+	}
+	
+	
+	/**
+	 * Similar to get_objects, but returns array of key values mapping post
+	 * title to id if available, otherwise it defaults to id=>id.
+	 **/
+	public function get_objects_as_options($options=array()){
+		$objects = $this->get_objects($options);
+		$opt     = array();
+		foreach($objects as $o){
+			switch(True){
+				case $this->options('use_title'):
+					$opt[$o->post_title] = $o->ID;
+					break;
+				default:
+					$opt[$o->ID] = $o->ID;
+					break;
+			}
+		}
+		return $opt;
+	}
+	
+	
+	/**
+	 * Return the instances values defined by $key.
+	 **/
 	public function options($key){
 		$vars = get_object_vars($this);
 		return $vars[$key];
 	}
 	
+	
+	/**
+	 * Additional fields on a custom post type may be defined by overriding this
+	 * method on an descendant object.
+	 **/
 	public function fields(){
 		return array();
 	}
 	
+	
+	/**
+	 * Using instance variables defined, returns an array defining what this
+	 * custom post type supports.
+	 **/
 	public function supports(){
 		#Default support array
 		$supports = array();
 		if ($this->options('use_title')){
-			$supports = array_merge($supports, array('title'));
+			$supports[] = 'title';
 		}
 		if ($this->options('use_order')){
-			$supports = array_merge($supports, array('page-attributes'));
+			$supports[] = 'page-attributes';
 		}
 		if ($this->options('use_thumbnails')){
-			$supports = array_merge($supports, array('thumbnail'));
+			$supports[] = 'thumbnail';
 		}
 		if ($this->options('use_editor')){
-			$supports = array_merge($supports, array('editor'));
+			$supports[] = 'editor';
+		}
+		if ($this->options('use_revisions')){
+			$supports[] = 'revisions';
 		}
 		return $supports;
 	}
 	
+	
+	/**
+	 * Creates labels array, defining names for admin panel.
+	 **/
 	public function labels(){
 		return array(
 			'name'          => __($this->options('plural_name')),
@@ -66,11 +126,16 @@ abstract class CustomPostType{
 		);
 	}
 	
+	
+	/**
+	 * Creates metabox array for custom post type. Override method in
+	 * descendants to add or modify metaboxes.
+	 **/
 	public function metabox(){
 		if ($this->options('use_metabox')){
 			return array(
 				'id'       => $this->options('name').'_metabox',
-				'title'    => __($this->options('singular_name').' Attributes'),
+				'title'    => __($this->options('singular_name').' Fields'),
 				'page'     => $this->options('name'),
 				'context'  => 'normal',
 				'priority' => 'high',
@@ -80,13 +145,17 @@ abstract class CustomPostType{
 		return null;
 	}
 	
+	
+	/**
+	 * Registers metaboxes defined for custom post type.
+	 **/
 	public function register_metaboxes(){
 		if ($this->options('use_metabox')){
 			$metabox = $this->metabox();
 			add_meta_box(
 				$metabox['id'],
 				$metabox['title'],
-				'mobile_show_meta_boxes',
+				'show_meta_boxes',
 				$metabox['page'],
 				$metabox['context'],
 				$metabox['priority']
@@ -94,19 +163,154 @@ abstract class CustomPostType{
 		}
 	}
 	
+	
+	/**
+	 * Registers the custom post type and any other ancillary actions that are
+	 * required for the post to function properly.
+	 **/
 	public function register(){
 		$registration = array(
-			'labels'   => $this->labels(),
-			'supports' => $this->supports(),
-			'public'   => $this->options('public'),
+			'labels'     => $this->labels(),
+			'supports'   => $this->supports(),
+			'public'     => $this->options('public'),
+			'taxonomies' => $this->options('taxonomies'),
+			'_builtin'   => $this->options('built_in')
 		);
+		
 		if ($this->options('use_order')){
-			$regisration = array_merge($registration, array('hierarchical' => True,));
+			$registration = array_merge($registration, array('hierarchical' => True,));
 		}
+		
 		register_post_type($this->options('name'), $registration);
-		if ($this->options('use_categories')){
-			register_taxonomy_for_object_type('category', $this->options('name'));
+		
+		if ($this->options('use_shortcode')){
+			add_shortcode($this->options('name').'-list', array($this, 'shortcode'));
 		}
+	}
+	
+	
+	/**
+	 * Shortcode for this custom post type.  Can be overridden for descendants.
+	 * Defaults to just outputting a list of objects outputted as defined by
+	 * toHTML method.
+	 **/
+	public function shortcode($attr){
+		$default = array(
+			'type' => $this->options('name'),
+		);
+		if (is_array($attr)){
+			$attr = array_merge($default, $attr);
+		}else{
+			$attr = $default;
+		}
+		return sc_object_list($attr);
+	}
+	
+	
+	/**
+	 * Handles output for a list of objects, can be overridden for descendants.
+	 * If you want to override how a list of objects are outputted, override
+	 * this, if you just want to override how a single object is outputted, see
+	 * the toHTML method.
+	 **/
+	public function objectsToHTML($objects, $css_classes){
+		if (count($objects) < 1){ return '';}
+		
+		$class = get_custom_post_type($objects[0]->post_type);
+		$class = new $class;
+		
+		ob_start();
+		?>
+		<ul class="<?php if($css_classes):?><?=$css_classes?><?php else:?><?=$class->options('name')?>-list<?php endif;?>">
+			<?php foreach($objects as $o):?>
+			<li>
+				<?=$class->toHTML($o)?>
+			</li>
+			<?php endforeach;?>
+		</ul>
+		<?php
+		$html = ob_get_clean();
+		return $html;
+	}
+	
+	
+	/**
+	 * Outputs this item in HTML.  Can be overridden for descendants.
+	 **/
+	public function toHTML($object){
+		$html = '<a href="'.get_permalink($object->ID).'">'.$object->post_title.'</a>';
+		return $html;
+	}
+}
+
+class Page extends CustomPostType {
+	public
+		$name           = 'page',
+		$plural_name    = 'Pages',
+		$singular_name  = 'Page',
+		$add_new_item   = 'Add New Page',
+		$edit_item      = 'Edit Page',
+		$new_item       = 'New Page',
+		$public         = True,
+		$use_editor     = True,
+		$use_thumbnails = False,
+		$use_order      = True,
+		$use_title      = True,
+		$use_metabox    = True,
+		$built_in       = True;
+
+	public function fields() {
+		$prefix = $this->options('name').'_';
+		return array(
+			array(
+				'name' => 'Hide Lower Section',
+				'desc' => 'This section normally contains the Flickr, News and Events widgets. The footer will not be hidden',
+				'id'   => $prefix.'hide_fold',
+				'type' => 'checkbox',
+			),
+				array(
+					'name' => 'Stylesheet',
+					'desc' => '',
+					'id' => $prefix.'stylesheet',
+					'type' => 'file',
+				),
+		);
+	}
+}
+
+class Post extends CustomPostType {
+	public
+		$name           = 'post',
+		$plural_name    = 'Posts',
+		$singular_name  = 'Post',
+		$add_new_item   = 'Add New Post',
+		$edit_item      = 'Edit Post',
+		$new_item       = 'New Post',
+		$public         = True,
+		$use_editor     = True,
+		$use_thumbnails = False,
+		$use_order      = True,
+		$use_title      = True,
+		$use_metabox    = True,
+		$taxonomies     = array('post_tag', 'category'),
+		$built_in       = True;
+
+	public function fields() {
+		$prefix = $this->options('name').'_';
+		return array(
+			array(
+				'name' => 'Hide Lower Section',
+				'desc' => 'This section normally contains the Flickr, News and Events widgets. The footer will not be hidden',
+				'id'   => $prefix.'hide_fold',
+				'type' => 'checkbox',
+			),
+				array(
+					'name' => 'Stylesheet',
+					'desc' => '',
+					'id' => $prefix.'stylesheet',
+					'type' => 'file',
+				),
+		);
 	}
 }
 
@@ -122,6 +326,7 @@ class NativeApp extends CustomPostType{
 		$public         = True,
 		$use_thumbnails = True,
 		$use_metabox    = True,
+		$use_editor     = False,
 		$use_title      = True;
 	
 	public function fields(){
@@ -160,6 +365,7 @@ class AppImage extends CustomPostType{
 		$use_thumbnails = True,
 		$use_order      = True,
 		$use_title      = True,
+		$use_editor     = False,
 		$use_metabox    = True;
 	
 	public function fields(){
@@ -186,6 +392,7 @@ class FeaturedModule extends CustomPostType{
 		$use_thumbnails = True,
 		$use_order      = True,
 		$use_title      = True,
+		$use_editor     = False,
 		$use_metabox    = True;
 
 	public function fields(){
@@ -218,176 +425,4 @@ class FeaturedModule extends CustomPostType{
 	}
 }
 
-/*/-------------------------------------
-Register custom post types and functions for display
--------------------------------------/*/
-function installed_custom_post_types(){
-	$installed = array('NativeApp', 'AppImage', 'FeaturedModule');
-	
-	return array_map(create_function('$class', '
-		return new $class;
-	'), $installed);
-}
-
-
-/**
- * Registers all installed custom post types
- *
- * @return void
- * @author Jared Lang
- **/
-function mobile_post_types(){
-	#Register custom post types
-	foreach(installed_custom_post_types() as $custom_post_type){
-		$custom_post_type->register();
-	}
-	
-	#This ensures that the permalinks for custom posts work
-	flush_rewrite_rules();
-	
-	#Override default page post type to use categories
-	register_taxonomy_for_object_type('category', 'page');
-}
-add_action('init', 'mobile_post_types');
-
-
-/**
- * Registers all metaboxes for install custom post types
- *
- * @return void
- * @author Jared Lang
- **/
-function mobile_meta_boxes(){
-	#Register custom post types metaboxes
-	foreach(installed_custom_post_types() as $custom_post_type){
-		$custom_post_type->register_metaboxes();
-	}
-}
-add_action('do_meta_boxes', 'mobile_meta_boxes');
-
-
-/**
- * Saves the data for a given post type
- *
- * @return void
- * @author Jared Lang
- **/
-function mobile_save_meta_data($post){
-	#Register custom post types metaboxes
-	foreach(installed_custom_post_types() as $custom_post_type){
-		if (get_post_type($post) == $custom_post_type->options('name')){
-			$meta_box = $custom_post_type->metabox();
-			break;
-		}
-	}
-	
-	return _save_meta_data($post, $meta_box);
-	
-}
-add_action('save_post', 'mobile_save_meta_data');
-
-
-/**
- * Displays the metaboxes for a given post type
- *
- * @return void
- * @author Jared Lang
- **/
-function mobile_show_meta_boxes($post){
-	#Register custom post types metaboxes
-	foreach(installed_custom_post_types() as $custom_post_type){
-		if (get_post_type($post) == $custom_post_type->options('name')){
-			$meta_box = $custom_post_type->metabox();
-			break;
-		}
-	}
-	return _show_meta_boxes($post, $meta_box);
-}
-
-/**
- * Handles saving a custom post as well as it's custom fields and metadata.
- *
- * @return void
- * @author Jared Lang
- **/
-function _save_meta_data($post_id, $meta_box){
-	// verify nonce
-	if (!wp_verify_nonce($_POST['mobile_meta_box_nonce'], basename(__FILE__))) {
-		return $post_id;
-	}
-
-	// check autosave
-	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-		return $post_id;
-	}
-
-	// check permissions
-	if ('page' == $_POST['post_type']) {
-		if (!current_user_can('edit_page', $post_id)) {
-			return $post_id;
-		}
-	} elseif (!current_user_can('edit_post', $post_id)) {
-		return $post_id;
-	}
-	
-	foreach ($meta_box['fields'] as $field) {
-		$old = get_post_meta($post_id, $field['id'], true);
-		$new = $_POST[$field['id']];
-		if ($new && $new != $old) {
-			update_post_meta($post_id, $field['id'], $new);
-		} elseif ('' == $new && $old) {
-			delete_post_meta($post_id, $field['id'], $old);
-		}
-	}
-}
-
-/**
- * Outputs the html for the fields defined for a given post and metabox.
- *
- * @return void
- * @author Jared Lang
- **/
-function _show_meta_boxes($post, $meta_box){
-	// Use nonce for verification
-	echo '<input type="hidden" name="mobile_meta_box_nonce" value="', wp_create_nonce(basename(__FILE__)), '" />';
-	
-	echo '<table class="form-table">';
-	foreach ($meta_box['fields'] as $field) {
-		// get current post meta data
-		$meta = get_post_meta($post->ID, $field['id'], true);
-	
-		echo '<tr>',
-			'<th style="width:20%"><label for="', $field['id'], '">', $field['name'], '</label></th>',
-			'<td>';
-		switch ($field['type']) {
-			case 'text':
-				echo '<input type="text" name="', $field['id'], '" id="', $field['id'], '" value="', htmlentities($meta ? $meta : $field['std']), '" size="30" style="width:97%" />', "\n", $field['desc'];
-				break;
-			case 'textarea':
-				echo '<textarea name="', $field['id'], '" id="', $field['id'], '" cols="60" rows="4" style="width:97%">', $meta ? $meta : $field['std'], '</textarea>', "\n", $field['desc'];
-				break;
-			case 'select':
-				echo '<select name="', $field['id'], '" id="', $field['id'], '">';
-				foreach ($field['options'] as $k=>$option) {
-					echo '<option', $meta == $option ? ' selected="selected"' : '', ' value="', $k, '">', $option, '</option>';
-				}
-				echo '</select>';
-				break;
-			case 'radio':
-				foreach ($field['options'] as $option) {
-					echo '<input type="radio" name="', $field['id'], '" value="', $option['value'], '"', $meta == $option['value'] ? ' checked="checked"' : '', ' />', $option['name'];
-				}
-				break;
-			case 'checkbox':
-				echo '<input type="checkbox" name="', $field['id'], '" id="', $field['id'], '"', $meta ? ' checked="checked"' : '', ' />';
-				break;
-		}
-		echo     '<td>',
-		'</tr>';
-	}
-	
-	echo '</table>';
-	
-	if($meta_box['helptxt']) echo '<p style="font-size:13px; padding:5px 0; color:#666;">' . $meta_box['helptxt'] . "</p>";
-}
 ?>
