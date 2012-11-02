@@ -5,7 +5,7 @@ Github Theme URI: https://github.com/UCF/ucf-mobile-wordpress
 Version: v1.1.2
 */
 
-/* UCF Header Styles */
+/* UCF Header Bar Styles */
 #UCFHBSearch_ucf fieldset #q {
 	line-height: 11px;
 	color: #000000;
@@ -18,7 +18,9 @@ Version: v1.1.2
 	moz-border-radius: 0;
 	margin-bottom: 0;
 	margin-top: 1px;
+	width:115px!important;
 }
+
 select#UCFHBHeaderLinks {
 	height: 18px;
 	font-size: 11px;
@@ -31,7 +33,6 @@ select#UCFHBHeaderLinks {
 	margin-top: 1px;
 	padding: 0;
 }
-#UCFHBHeader * {height:auto;}
 
 
 /* Page-wide */
