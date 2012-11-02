@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-# Thoughts
-
-we could maintain a blank wordpress template for master and branch it for each wordpress site
-=======
 # Generic Wordpress Theme for UCF Marketing
 
 Simple theme which includes some of the most common theme elements found in most
@@ -69,32 +64,6 @@ custom bar graphs, pie charts, etc. and their required javascript dependencies.
 For more information on rgraph, read the documentation at http://www.rgraph.net/
 
 
-## Custom Post Types
-
-### Document
-* Basic post type for PDFs, Word docs, Excel sheets, etc.
-* Specify external URL or upload a file.  External URL takes precedence over
-uploaded file.
-* Outputs mimetype css class for optional list item styling.
-
-### Video
-* Post type for associating a Youtube video, its description, and its thumbnail
-within Wordpress.  Allows for easy video embed output via shortcode.
-
-### Publication
-* Defines an Issuu pub by its URL at http://publications.ucf.edu
-
-### Person
-* Defines a staff member.
-* Can be organized via Organizational Group custom taxonomy.
-
-
-## Custom Taxonomies
-
-### Organizational Group (hierarchical)
-* Defines a set of People.
-
-
 ## Shortcodes
 
 ### [slideshow]
@@ -104,26 +73,6 @@ Arguments controlling transition timing and animations are available.
 carousels, use the Wordpress HTML editor and insert your content using the
 required Bootstrap classes.
 
-### [posttype-list]
-* Custom post types that have defined $use_shortcode as True can automatically
-utilize this shortcode for displaying a list of posts created under the given
-post type; e.g., [document-list] will output a list of all published Documents.
-Additional parameters can be used to further narrow down the shortcode's results;
-see the Theme Help section on shortcodes for an available list of filters.
-
 ### [search_form]
 * Outputs the site search form.  The search form output can be modified via
 searchform.php
-
-### [publication]
-* Include the defined Publication, referenced by its title.
-* e.g., [publication name="Where are the robots Magazine"]
-
-### [person-picture-list]
-* Similar to [person-list], but also outputs thumbnails for each Person.
-
-### [post-type-search]
-* Outputs a list of People with thumbnails, person names, and job titles.
-* If a person's description is available, a link to the person's profile will be outputted. If a thumbnail for the person does not exist, a default 'No Photo Available' thumbnail will display.
-* An optional row_size parameter is available to customize the number of rows that will display, in addition to the other filter parameters available to the person-list shortcode.
->>>>>>> upstream/master
